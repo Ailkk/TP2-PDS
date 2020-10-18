@@ -3,7 +3,7 @@ package TP2.ASD;
 import TP2.Llvm;
 import TP2.TypeException;
 import TP2.Utils;
-import TP2.ASD.Expression.RetExpression;
+
 
 public class SubExpression extends Expression{
 	Expression left;
@@ -20,9 +20,9 @@ public class SubExpression extends Expression{
     }
 
     // IR generation
-    public RetExpression toIR() throws TypeException {
-      RetExpression leftRet = left.toIR();
-      RetExpression rightRet = right.toIR();
+    public RetStatement toIR() throws TypeException {
+      RetStatement leftRet = left.toIR();
+      RetStatement rightRet = right.toIR();
 
       // We check if the types mismatches
       if(!leftRet.type.equals(rightRet.type)) {
@@ -44,6 +44,6 @@ public class SubExpression extends Expression{
 
       // return the generated IR, plus the type of this expression
       // and where to find its result
-      return new RetExpression(leftRet.ir, leftRet.type, result);
+      return new RetStatement(leftRet.ir, leftRet.type, result);
     }
 }

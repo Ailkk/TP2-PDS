@@ -13,9 +13,9 @@ import TP2.Llvm;
       return "" + value;
     }
 
-    public RetExpression toIR() {
+    public RetStatement toIR() {
       // Here we simply return an empty IR
       // the `result' of this expression is the integer itself (as string)
-      return new RetExpression(new Llvm.IR(Llvm.empty(), Llvm.empty()), new Int(), "" + value);
+      return new RetStatement(new Llvm.IR(Llvm.empty(), Llvm.empty()), new Int(), "" + value);
     }
   }

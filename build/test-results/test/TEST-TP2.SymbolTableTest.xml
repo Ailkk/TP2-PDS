@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TP2.SymbolTableTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2020-10-18T21:33:40" hostname="ROMAIN" time="0.01">
+  <properties/>
+  <testcase name="testLookupEmpty" classname="TP2.SymbolTableTest" time="0.002"/>
+  <testcase name="testEquals" classname="TP2.SymbolTableTest" time="0.004"/>
+  <testcase name="testParent" classname="TP2.SymbolTableTest" time="0.001"/>
+  <testcase name="testSimple" classname="TP2.SymbolTableTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

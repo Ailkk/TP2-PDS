@@ -177,6 +177,24 @@ public class Llvm {
       return "ret " + type + " " + value + "\n";
     }
   }
+  
+  
+  static public class Affectation extends Instruction {
+	Type type;
+    String left;
+    String right;
+    
+    public Affectation(Type t, String l, String r) {
+    	this.type = t;
+    	this.left = l;
+    	this.right = r;
+    }
+
+	public String toString() {
+		return "store " + type + " " + left + ", " + type + " " + right + "\n";
+	}
+	  
+  }
 
   // TODO : other instructions
 }

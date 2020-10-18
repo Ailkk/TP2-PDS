@@ -2,11 +2,12 @@ package TP2.ASD;
 
 import TP2.Llvm;
 import TP2.TypeException;
+import TP2.ASD.Statement.RetStatement;
 
 public class Program {
-    Expression e; // What a program contains. TODO : change when you extend the language
+    Statement e; // What a program contains. TODO : change when you extend the language
 
-    public Program(Expression e) {
+    public Program(Statement e) {
       this.e = e;
     }
 
@@ -20,11 +21,11 @@ public class Program {
       // TODO : change when you extend the language
 
       // computes the IR of the expression
-      Expression.RetExpression retExpr = e.toIR();
+      RetStatement retStat = e.toIR();
       // add a return instruction
-      Llvm.Instruction ret = new Llvm.Return(retExpr.type.toLlvmType(), retExpr.result);
-      retExpr.ir.appendCode(ret);
+      Llvm.Instruction ret = new Llvm.Return(retStat.type.toLlvmType(), retStat.result);
+      retStat.ir.appendCode(ret);
 
-      return retExpr.ir;
+      return retStat.ir;
     }
   }

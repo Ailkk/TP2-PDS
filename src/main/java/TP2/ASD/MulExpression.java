@@ -19,9 +19,9 @@ import TP2.Utils;
     }
 
     // IR generation
-    public RetExpression toIR() throws TypeException {
-      RetExpression leftRet = left.toIR();
-      RetExpression rightRet = right.toIR();
+    public RetStatement toIR() throws TypeException {
+      RetStatement leftRet = left.toIR();
+      RetStatement rightRet = right.toIR();
 
       if(!leftRet.type.equals(rightRet.type)) {
         throw new TypeException("type mismatch: have " + leftRet.type + " and " + rightRet.type);
@@ -35,6 +35,6 @@ import TP2.Utils;
 
       leftRet.ir.appendCode(mul);
 
-      return new RetExpression(leftRet.ir, leftRet.type, result);
+      return new RetStatement(leftRet.ir, leftRet.type, result);
     }
   }
