@@ -195,6 +195,19 @@ public class Llvm {
 	}
 	  
   }
+  
+  
+  static public class Bloc extends Instruction{
+	  String value;
+	  
+	  public Bloc(String v) {
+		  this.value=v;
+	  }
+
+	public String toString() {
+		return value + "\n";
+	}
+  }
 
   // TODO : other instructions
 }

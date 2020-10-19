@@ -10,14 +10,20 @@ options {
 
   import java.util.stream.Collectors;
   import java.util.Arrays;
+  import java.util.List;
 }
 
 
 // TODO : other rules
 
 program returns [TP2.ASD.Program out]
-    : e=statement EOF { $out = new TP2.ASD.Program($e.out); }
+    : e=bloc EOF { $out = new TP2.ASD.Program($e.out); }
     ;
+    
+bloc returns [TP2.ASD.Bloc out]
+	: {List<TP2.ASD.Statement> l = new ArrayList();}
+	(s=statement {l.add($s.out);} )+ { $out = new TP2.ASD.Bloc(l);}
+	;
 
 statement returns [TP2.ASD.Statement out]
     : e=expression { $out = $e.out; }

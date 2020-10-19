@@ -18,6 +18,5 @@ public abstract class Statement {
         this.type = type;
         this.result = result;
       }
-
     }
   }
