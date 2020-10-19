@@ -7,7 +7,7 @@ import TP2.TypeException;
 
 public class Bloc {
     List<Statement> sl;
-    //List<Declaration> dl;
+    List<Variable> v;
 
     static public class RetBloc {
       // The LLVM IR:
@@ -22,23 +22,23 @@ public class Bloc {
       }
 
     }
-/*
- *     public Bloc(List<Declaration> dl, List<Statement> sl) {
-      this.dl = dl;
+
+   public Bloc(List<Variable> var, List<Statement> sl) {
+      this.v = var;
       this.sl = sl;
-    }*/
- 
+    }
+ /*
     public Bloc( List<Statement> sl) {
       this.sl = sl;
     }
-
+*/
     // Pretty-printer
     public String pp() {
 
       String affiche = "";
-      /*for(Declaration d : dl) {
-        affiche += d.pp();
-      }*/
+      for(Variable vari : v) {
+        affiche += vari.pp();
+      }
 
       for(Statement s : sl) {
         affiche += s.pp();
@@ -50,7 +50,17 @@ public class Bloc {
     // IR generation
     public RetBloc toIR() throws TypeException {
       Llvm.IR irBlock = new  Llvm.IR(Llvm.empty(), Llvm.empty());
+     
+      /*
+      Variable.RetVariable retVar = null;
+      
+      for(Variable variable : this.v) {
+          if(retVar == null) retVar = variable.toIR(scope, func);
+          else retVar.ir.append(variable.toIR(scope, func).ir);
+      }
 
+      if(retVar != null) irBlock.append(retVar.ir);
+*/
       Llvm.Instruction commmentBlockD = new Llvm.Bloc("Bloc Début");
       irBlock.appendCode(commmentBlockD);
 

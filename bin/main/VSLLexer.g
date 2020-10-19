@@ -27,6 +27,8 @@ MOINS : '-'      ;
 MULTI : '*'      ;
 DIVI  : '/'      ;
 EGAL  : ':='     ;
+INT	  : 'INT'    ;
+VIRG  : ','      ;
 
 
 // TODO : other keywords

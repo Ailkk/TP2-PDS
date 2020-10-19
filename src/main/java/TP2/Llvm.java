@@ -81,6 +81,35 @@ public class Llvm {
       return "i32";
     }
   }
+  
+  
+  static public class ArrayType extends Type {
+
+      /**
+       * Type Llvm des éléments du tableau
+       */
+      Type type;
+
+      /**
+       * Taille du tableau
+       */
+      int size;
+
+      /**
+       * Constructeur
+       * @param type Type Llvm des éléments du tableau
+       * @param size Taille des éléments du tableau
+       */
+      public ArrayType(Type type, int size) {
+          this.type = type;
+          this.size = size;
+      }
+
+      @Override
+      public String toString() {
+          return this.type + "*";
+      }
+  }
 
   // TODO : other types
 
@@ -207,6 +236,35 @@ public class Llvm {
 	public String toString() {
 		return value + "\n";
 	}
+  }
+  
+  static public class Alloca extends Instruction {
+      /**
+       * Type de la variable
+       */
+      Type type;
+
+      /**
+       * Nom de la variable
+       */
+      String ident;
+
+      /**
+       * Constructeur
+       */
+      public Alloca(Type type, String ident) {
+          this.type = type;
+          this.ident = ident;
+      }
+
+      @Override
+      public String toString() {
+          String ret = this.ident + " = alloca ";
+
+          ret += (this.type instanceof ArrayType) ? ((ArrayType) this.type).type + ", " + ((ArrayType) this.type).type + " " + ((ArrayType) this.type).size : "" + this.type;
+
+          return ret + "\n";
+      }
   }
 
   // TODO : other instructions
