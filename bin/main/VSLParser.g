@@ -22,7 +22,7 @@ program returns [TP2.ASD.Program out]
     
 bloc returns [TP2.ASD.Bloc out]
 	: {List<TP2.ASD.Statement> l = new ArrayList(); List<TP2.ASD.Variable> r = new ArrayList(); }
-	(v=variable {r.add($v.out);} )*
+	INT (v=variable {r.add($v.out);} )*
 	(s=statement {l.add($s.out);} )+ { $out = new TP2.ASD.Bloc(r,l);}
 	;
 
@@ -40,8 +40,8 @@ id returns [TP2.ASD.Ident out]
     ;
     
 expression returns [TP2.ASD.Expression out]
-    : l=factor PLUS r=expression  { $out = new TP2.ASD.AddExpression($l.out, $r.out); }
-    | l=factor MOINS r=expression  { $out = new TP2.ASD.SubExpression($l.out, $r.out); }
+    : r=expression PLUS l=factor  { $out = new TP2.ASD.AddExpression($l.out, $r.out); }
+    | r=expression MOINS l=factor  { $out = new TP2.ASD.SubExpression($l.out, $r.out); }
     | f=factor { $out = $f.out; }
     ;
    
@@ -57,13 +57,10 @@ factor returns [TP2.ASD.Expression out]
     ;
 
 variable returns [TP2.ASD.Variable out]
-	:{ List<TP2.ASD.Ident> l = new ArrayList();}
-    INT (i=id {l.add($i.out);} )
-    (VIRG i=id {l.add($i.out);} )*
-    { $out = new TP2.ASD.Variable(l); }
-    ;
+	:IDENT { $out = new TP2.ASD.IntegerVariable($IDENT.text);}
+	;
 
-
+	
 primary returns [TP2.ASD.Expression out]
     : INTEGER { $out = new TP2.ASD.IntegerExpression($INTEGER.int); }
     // TODO : that's all?

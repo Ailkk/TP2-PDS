@@ -1,11 +1,12 @@
 package TP2.ASD;
 
 import TP2.Llvm;
+import TP2.SymbolTable;
 import TP2.TypeException;
 
 public abstract class Statement {
     public abstract String pp();
-    public abstract RetStatement toIR() throws TypeException;
+    public abstract RetStatement toIR(SymbolTable st) throws TypeException;
 
     static public class RetStatement{
       // The LLVM IR:

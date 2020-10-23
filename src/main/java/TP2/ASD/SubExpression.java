@@ -1,6 +1,7 @@
 package TP2.ASD;
 
 import TP2.Llvm;
+import TP2.SymbolTable;
 import TP2.TypeException;
 import TP2.Utils;
 
@@ -20,9 +21,9 @@ public class SubExpression extends Expression{
     }
 
     // IR generation
-    public RetStatement toIR() throws TypeException {
-      RetStatement leftRet = left.toIR();
-      RetStatement rightRet = right.toIR();
+    public RetStatement toIR(SymbolTable st) throws TypeException {
+      RetStatement leftRet = left.toIR(st);
+      RetStatement rightRet = right.toIR(st);
 
       // We check if the types mismatches
       if(!leftRet.type.equals(rightRet.type)) {

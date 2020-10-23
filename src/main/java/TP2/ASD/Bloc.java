@@ -3,6 +3,7 @@ package TP2.ASD;
 import java.util.List;
 
 import TP2.Llvm;
+import TP2.SymbolTable;
 import TP2.TypeException;
 
 public class Bloc {
@@ -48,7 +49,8 @@ public class Bloc {
     }
 
     // IR generation
-    public RetBloc toIR() throws TypeException {
+    public RetBloc toIR(SymbolTable st) throws TypeException {
+    	
       Llvm.IR irBlock = new  Llvm.IR(Llvm.empty(), Llvm.empty());
      
       /*
@@ -72,7 +74,7 @@ public class Bloc {
 
       //For tout les statements
       for (Statement s : sl) {
-        Statement.RetStatement retStmt = s.toIR();
+        Statement.RetStatement retStmt = s.toIR(st);
         irBlock.append(retStmt.ir);
         lastExprRes = retStmt.result;
         lastTypeRes = retStmt.type;

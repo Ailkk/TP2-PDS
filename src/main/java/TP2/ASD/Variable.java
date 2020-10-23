@@ -3,27 +3,20 @@ package TP2.ASD;
 import java.util.List;
 
 import TP2.Llvm;
+import TP2.SymbolTable;
 import TP2.TypeException;
 import TP2.Utils;
 import TP2.ASD.Statement.RetStatement;
 
-public class Variable {
-    List<Ident> l;
+public abstract class Variable {
+    String name;
 
-    public Variable (List<Ident> a){
-      this.l = a;
+    public Variable (String n){
+      this.name = n;
     }
 
-    
-    
-    public String pp() {
-      String affiche = "";
-      for(Ident a : l) {
-        affiche += a.pp();
-      }
-      return affiche;
-    }
-    
+    public abstract String pp();
+    public abstract RetVariable toIR(SymbolTable st);
     
     
     public class RetVariable {
