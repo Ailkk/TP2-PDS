@@ -61,7 +61,7 @@ public class Bloc {
 
       if(retVar != null) irBlock.append(retVar.ir);
 */
-      Llvm.Instruction commmentBlockD = new Llvm.Bloc("Bloc Début");
+      Llvm.Instruction commmentBlockD = new Llvm.Bloc("Test Bloc DÃ©but");
       irBlock.appendCode(commmentBlockD);
 
       String lastExprRes = "0";
@@ -78,7 +78,7 @@ public class Bloc {
         lastTypeRes = retStmt.type;
       }
       //Fin du For
-      commmentBlockD = new Llvm.Bloc("Bloc Fin");
+      commmentBlockD = new Llvm.Bloc("Test Bloc Fin");
       irBlock.appendCode(commmentBlockD);
 
       return new RetBloc(irBlock, lastTypeRes, lastExprRes);

@@ -43,8 +43,8 @@ expression returns [TP2.ASD.Expression out]
     : l=factor PLUS r=expression  { $out = new TP2.ASD.AddExpression($l.out, $r.out); }
     | l=factor MOINS r=expression  { $out = new TP2.ASD.SubExpression($l.out, $r.out); }
     | f=factor { $out = $f.out; }
-    // TODO : that's all?
     ;
+   
 
 factor returns [TP2.ASD.Expression out]
     : p=primary { $out = $p.out; }
@@ -54,7 +54,6 @@ factor returns [TP2.ASD.Expression out]
     | l=factor DIVI r=expression  { $out = new TP2.ASD.DivExpression($l.out, $r.out); }
     | LP l=factor PLUS r=expression RP { $out = new TP2.ASD.AddExpression($l.out, $r.out); }
     | LP l=factor MOINS r=expression RP { $out = new TP2.ASD.SubExpression($l.out, $r.out); }
-    // TODO : that's all?
     ;
 
 variable returns [TP2.ASD.Variable out]

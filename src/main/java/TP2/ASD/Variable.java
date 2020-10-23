@@ -3,6 +3,9 @@ package TP2.ASD;
 import java.util.List;
 
 import TP2.Llvm;
+import TP2.TypeException;
+import TP2.Utils;
+import TP2.ASD.Statement.RetStatement;
 
 public class Variable {
     List<Ident> l;
@@ -11,6 +14,8 @@ public class Variable {
       this.l = a;
     }
 
+    
+    
     public String pp() {
       String affiche = "";
       for(Ident a : l) {
@@ -19,32 +24,40 @@ public class Variable {
       return affiche;
     }
     
+    
+    
     public class RetVariable {
-        /**
-         * LLVM instruction
-         */
+        
         public Llvm.IR ir;
-
-        /**
-         * Type de la variable (synthesized)
-         */
         public Type type;
-
-        /**
-         * Identifiant de la variable (synthesized)
-         */
         public String result;
 
-        /**
-         * Constructeur
-         * @param ir L'instruction LLVM
-         * @param type Le type de la variable
-         * @param result Le nom de la variable
-         */
         public RetVariable(Llvm.IR ir, Type type, String result) {
             this.ir = ir;
             this.type = type;
             this.result = result;
         }
-    }
+        //Llvm.Instruction alloc = new Llvm.Alloc(leftRet.type.toLlvmType(), leftRet.result, rightRet.result, result);
+
+        // append this instruction
+        //leftRet.ir.appendCode(alloc);
+        
+	     /*
+	      leftRet.ir.append(rightRet.ir);
+
+	      // allocate a new identifier for the result
+	      String result = Utils.newtmp();
+
+	      // new add instruction result = left + right
+	      Llvm.Instruction aff = new Llvm.Affectation(leftRet.type.toLlvmType(), leftRet.result, rightRet.result);
+
+	      // append this instruction
+	      leftRet.ir.appendCode(aff);
+
+	      // return the generated IR, plus the type of this expression
+	      // and where to find its result
+	      return new RetStatement(leftRet.ir, leftRet.type, result);
+    */
+        
   }
+}

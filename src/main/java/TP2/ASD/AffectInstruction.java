@@ -36,10 +36,10 @@ public class AffectInstruction extends Statement {
 	      String result = Utils.newtmp();
 
 	      // new add instruction result = left + right
-	      Llvm.Instruction add = new Llvm.Affectation(leftRet.type.toLlvmType(), leftRet.result, rightRet.result);
+	      Llvm.Instruction aff = new Llvm.Affectation(leftRet.type.toLlvmType(), leftRet.result, rightRet.result);
 
 	      // append this instruction
-	      leftRet.ir.appendCode(add);
+	      leftRet.ir.appendCode(aff);
 
 	      // return the generated IR, plus the type of this expression
 	      // and where to find its result

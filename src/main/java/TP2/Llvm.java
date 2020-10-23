@@ -86,7 +86,7 @@ public class Llvm {
   static public class ArrayType extends Type {
 
       /**
-       * Type Llvm des éléments du tableau
+       * Type Llvm des ï¿½lï¿½ments du tableau
        */
       Type type;
 
@@ -97,8 +97,8 @@ public class Llvm {
 
       /**
        * Constructeur
-       * @param type Type Llvm des éléments du tableau
-       * @param size Taille des éléments du tableau
+       * @param type Type Llvm des ï¿½lï¿½ments du tableau
+       * @param size Taille des ï¿½lï¿½ments du tableau
        */
       public ArrayType(Type type, int size) {
           this.type = type;
@@ -188,7 +188,7 @@ public class Llvm {
 	    }
 
 	    public String toString() {
-	      return lvalue + " = div " + type + " " + left + ", " + right +  "\n";
+	      return lvalue + " = udiv " + type + " " + left + ", " + right +  "\n";
 	    }
 	  }
   
@@ -238,26 +238,14 @@ public class Llvm {
 	}
   }
   
-  static public class Alloca extends Instruction {
-      /**
-       * Type de la variable
-       */
+  static public class Alloc extends Instruction {
+	  String ident;
       Type type;
-
-      /**
-       * Nom de la variable
-       */
-      String ident;
-
-      /**
-       * Constructeur
-       */
-      public Alloca(Type type, String ident) {
+      public Alloc(Type type, String ident) {
           this.type = type;
           this.ident = ident;
       }
-
-      @Override
+      
       public String toString() {
           String ret = this.ident + " = alloca ";
 
