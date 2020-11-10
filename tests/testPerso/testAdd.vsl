@@ -1,2 +1,2 @@
-INT x
-x:=6+3
+INT y, x, u
+y:=6

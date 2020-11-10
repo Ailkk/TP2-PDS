@@ -22,7 +22,7 @@ program returns [TP2.ASD.Program out]
     
 bloc returns [TP2.ASD.Bloc out]
 	: {List<TP2.ASD.Statement> l = new ArrayList(); List<TP2.ASD.Variable> r = new ArrayList(); }
-	(INT (v=variable {r.add($v.out);} )*)?
+	(INT v=variable {r.add($v.out);}  ( VIRG v=variable {r.add($v.out);} )* )?
 	(s=statement {l.add($s.out);} )+ { $out = new TP2.ASD.Bloc(r,l);}
 	;
 

@@ -133,17 +133,21 @@ public class VSLParser extends Parser {
 		public VariableContext v;
 		public StatementContext s;
 		public TerminalNode INT() { return getToken(VSLParser.INT, 0); }
+		public List<VariableContext> variable() {
+			return getRuleContexts(VariableContext.class);
+		}
+		public VariableContext variable(int i) {
+			return getRuleContext(VariableContext.class,i);
+		}
 		public List<StatementContext> statement() {
 			return getRuleContexts(StatementContext.class);
 		}
 		public StatementContext statement(int i) {
 			return getRuleContext(StatementContext.class,i);
 		}
-		public List<VariableContext> variable() {
-			return getRuleContexts(VariableContext.class);
-		}
-		public VariableContext variable(int i) {
-			return getRuleContext(VariableContext.class,i);
+		public List<TerminalNode> VIRG() { return getTokens(VSLParser.VIRG); }
+		public TerminalNode VIRG(int i) {
+			return getToken(VSLParser.VIRG, i);
 		}
 		public BlocContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -156,49 +160,51 @@ public class VSLParser extends Parser {
 		enterRule(_localctx, 2, RULE_bloc);
 		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			List<TP2.ASD.Statement> l = new ArrayList(); List<TP2.ASD.Variable> r = new ArrayList(); 
-			setState(32);
+			setState(35);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==INT) {
 				{
 				setState(23);
 				match(INT);
-				setState(29);
+				setState(24);
+				((BlocContext)_localctx).v = variable();
+				r.add(((BlocContext)_localctx).v.out);
+				setState(32);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,0,_ctx);
-				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-					if ( _alt==1 ) {
-						{
-						{
-						setState(24);
-						((BlocContext)_localctx).v = variable();
-						r.add(((BlocContext)_localctx).v.out);
-						}
-						} 
+				_la = _input.LA(1);
+				while (_la==VIRG) {
+					{
+					{
+					setState(26);
+					match(VIRG);
+					setState(27);
+					((BlocContext)_localctx).v = variable();
+					r.add(((BlocContext)_localctx).v.out);
 					}
-					setState(31);
+					}
+					setState(34);
 					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input,0,_ctx);
+					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(37); 
+			setState(40); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(34);
+				setState(37);
 				((BlocContext)_localctx).s = statement();
 				l.add(((BlocContext)_localctx).s.out);
 				}
 				}
-				setState(39); 
+				setState(42); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LP) | (1L << IDENT) | (1L << INTEGER))) != 0) );
@@ -236,14 +242,14 @@ public class VSLParser extends Parser {
 		StatementContext _localctx = new StatementContext(_ctx, getState());
 		enterRule(_localctx, 4, RULE_statement);
 		try {
-			setState(49);
+			setState(52);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case LP:
 			case INTEGER:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(43);
+				setState(46);
 				((StatementContext)_localctx).e = expression(0);
 				 ((StatementContext)_localctx).out =  ((StatementContext)_localctx).e.out; 
 				}
@@ -251,7 +257,7 @@ public class VSLParser extends Parser {
 			case IDENT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(46);
+				setState(49);
 				((StatementContext)_localctx).a = assignment();
 				 ((StatementContext)_localctx).out =  ((StatementContext)_localctx).a.out; 
 				}
@@ -294,11 +300,11 @@ public class VSLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(51);
+			setState(54);
 			((AssignmentContext)_localctx).l = id();
-			setState(52);
+			setState(55);
 			match(EGAL);
-			setState(53);
+			setState(56);
 			((AssignmentContext)_localctx).r = expression(0);
 			 ((AssignmentContext)_localctx).out =  new TP2.ASD.AffectInstruction(((AssignmentContext)_localctx).l.out, ((AssignmentContext)_localctx).r.out); 
 			}
@@ -330,7 +336,7 @@ public class VSLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(56);
+			setState(59);
 			((IdContext)_localctx).IDENT = match(IDENT);
 			 ((IdContext)_localctx).out =  new TP2.ASD.Ident((((IdContext)_localctx).IDENT!=null?((IdContext)_localctx).IDENT.getText():null)); 
 			}
@@ -381,12 +387,12 @@ public class VSLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(60);
+			setState(63);
 			((ExpressionContext)_localctx).f = factor(0);
 			 ((ExpressionContext)_localctx).out =  ((ExpressionContext)_localctx).f.out; 
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(75);
+			setState(78);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -394,7 +400,7 @@ public class VSLParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(73);
+					setState(76);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 					case 1:
@@ -403,11 +409,11 @@ public class VSLParser extends Parser {
 						_localctx.r = _prevctx;
 						_localctx.r = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(63);
+						setState(66);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(64);
+						setState(67);
 						match(PLUS);
-						setState(65);
+						setState(68);
 						((ExpressionContext)_localctx).l = factor(0);
 						 ((ExpressionContext)_localctx).out =  new TP2.ASD.AddExpression(((ExpressionContext)_localctx).l.out, ((ExpressionContext)_localctx).r.out); 
 						}
@@ -418,11 +424,11 @@ public class VSLParser extends Parser {
 						_localctx.r = _prevctx;
 						_localctx.r = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(68);
+						setState(71);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(69);
+						setState(72);
 						match(MOINS);
-						setState(70);
+						setState(73);
 						((ExpressionContext)_localctx).l = factor(0);
 						 ((ExpressionContext)_localctx).out =  new TP2.ASD.SubExpression(((ExpressionContext)_localctx).l.out, ((ExpressionContext)_localctx).r.out); 
 						}
@@ -430,7 +436,7 @@ public class VSLParser extends Parser {
 					}
 					} 
 				}
-				setState(77);
+				setState(80);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			}
@@ -488,79 +494,79 @@ public class VSLParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(110);
+			setState(113);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
 				{
-				setState(79);
+				setState(82);
 				((FactorContext)_localctx).p = primary();
 				 ((FactorContext)_localctx).out =  ((FactorContext)_localctx).p.out; 
 				}
 				break;
 			case 2:
 				{
-				setState(82);
-				match(LP);
-				setState(83);
-				((FactorContext)_localctx).l = factor(0);
-				setState(84);
-				match(MULTI);
 				setState(85);
-				((FactorContext)_localctx).r = expression(0);
+				match(LP);
 				setState(86);
+				((FactorContext)_localctx).l = factor(0);
+				setState(87);
+				match(MULTI);
+				setState(88);
+				((FactorContext)_localctx).r = expression(0);
+				setState(89);
 				match(RP);
 				 ((FactorContext)_localctx).out =  new TP2.ASD.MulExpression(((FactorContext)_localctx).l.out, ((FactorContext)_localctx).r.out); 
 				}
 				break;
 			case 3:
 				{
-				setState(89);
-				match(LP);
-				setState(90);
-				((FactorContext)_localctx).l = factor(0);
-				setState(91);
-				match(DIVI);
 				setState(92);
-				((FactorContext)_localctx).r = expression(0);
+				match(LP);
 				setState(93);
+				((FactorContext)_localctx).l = factor(0);
+				setState(94);
+				match(DIVI);
+				setState(95);
+				((FactorContext)_localctx).r = expression(0);
+				setState(96);
 				match(RP);
 				 ((FactorContext)_localctx).out =  new TP2.ASD.DivExpression(((FactorContext)_localctx).l.out, ((FactorContext)_localctx).r.out); 
 				}
 				break;
 			case 4:
 				{
-				setState(96);
-				match(LP);
-				setState(97);
-				((FactorContext)_localctx).l = factor(0);
-				setState(98);
-				match(PLUS);
 				setState(99);
-				((FactorContext)_localctx).r = expression(0);
+				match(LP);
 				setState(100);
+				((FactorContext)_localctx).l = factor(0);
+				setState(101);
+				match(PLUS);
+				setState(102);
+				((FactorContext)_localctx).r = expression(0);
+				setState(103);
 				match(RP);
 				 ((FactorContext)_localctx).out =  new TP2.ASD.AddExpression(((FactorContext)_localctx).l.out, ((FactorContext)_localctx).r.out); 
 				}
 				break;
 			case 5:
 				{
-				setState(103);
-				match(LP);
-				setState(104);
-				((FactorContext)_localctx).l = factor(0);
-				setState(105);
-				match(MOINS);
 				setState(106);
-				((FactorContext)_localctx).r = expression(0);
+				match(LP);
 				setState(107);
+				((FactorContext)_localctx).l = factor(0);
+				setState(108);
+				match(MOINS);
+				setState(109);
+				((FactorContext)_localctx).r = expression(0);
+				setState(110);
 				match(RP);
 				 ((FactorContext)_localctx).out =  new TP2.ASD.SubExpression(((FactorContext)_localctx).l.out, ((FactorContext)_localctx).r.out); 
 				}
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(124);
+			setState(127);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,8,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -568,7 +574,7 @@ public class VSLParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(122);
+					setState(125);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 					case 1:
@@ -577,11 +583,11 @@ public class VSLParser extends Parser {
 						_localctx.l = _prevctx;
 						_localctx.l = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_factor);
-						setState(112);
+						setState(115);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(113);
+						setState(116);
 						match(MULTI);
-						setState(114);
+						setState(117);
 						((FactorContext)_localctx).r = expression(0);
 						 ((FactorContext)_localctx).out =  new TP2.ASD.MulExpression(((FactorContext)_localctx).l.out, ((FactorContext)_localctx).r.out); 
 						}
@@ -592,11 +598,11 @@ public class VSLParser extends Parser {
 						_localctx.l = _prevctx;
 						_localctx.l = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_factor);
-						setState(117);
+						setState(120);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(118);
+						setState(121);
 						match(DIVI);
-						setState(119);
+						setState(122);
 						((FactorContext)_localctx).r = expression(0);
 						 ((FactorContext)_localctx).out =  new TP2.ASD.DivExpression(((FactorContext)_localctx).l.out, ((FactorContext)_localctx).r.out); 
 						}
@@ -604,7 +610,7 @@ public class VSLParser extends Parser {
 					}
 					} 
 				}
-				setState(126);
+				setState(129);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,8,_ctx);
 			}
@@ -637,7 +643,7 @@ public class VSLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(127);
+			setState(130);
 			((VariableContext)_localctx).IDENT = match(IDENT);
 			 ((VariableContext)_localctx).out =  new TP2.ASD.IntegerVariable((((VariableContext)_localctx).IDENT!=null?((VariableContext)_localctx).IDENT.getText():null));
 			}
@@ -669,7 +675,7 @@ public class VSLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(130);
+			setState(133);
 			((PrimaryContext)_localctx).INTEGER = match(INTEGER);
 			 ((PrimaryContext)_localctx).out =  new TP2.ASD.IntegerExpression((((PrimaryContext)_localctx).INTEGER!=null?Integer.valueOf(((PrimaryContext)_localctx).INTEGER.getText()):0)); 
 			}
@@ -714,39 +720,40 @@ public class VSLParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\20\u0088\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\20\u008b\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\3"+
-		"\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\7\3\36\n\3\f\3\16\3!\13\3\5\3#\n\3\3\3"+
-		"\3\3\3\3\6\3(\n\3\r\3\16\3)\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\5\4\64\n\4"+
-		"\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3"+
-		"\7\3\7\3\7\3\7\3\7\7\7L\n\7\f\7\16\7O\13\7\3\b\3\b\3\b\3\b\3\b\3\b\3\b"+
-		"\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3"+
-		"\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5\bq\n\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3"+
-		"\b\3\b\3\b\7\b}\n\b\f\b\16\b\u0080\13\b\3\t\3\t\3\t\3\n\3\n\3\n\3\n\2"+
-		"\4\f\16\13\2\4\6\b\n\f\16\20\22\2\2\2\u008a\2\24\3\2\2\2\4\30\3\2\2\2"+
-		"\6\63\3\2\2\2\b\65\3\2\2\2\n:\3\2\2\2\f=\3\2\2\2\16p\3\2\2\2\20\u0081"+
-		"\3\2\2\2\22\u0084\3\2\2\2\24\25\5\4\3\2\25\26\7\2\2\3\26\27\b\2\1\2\27"+
-		"\3\3\2\2\2\30\"\b\3\1\2\31\37\7\f\2\2\32\33\5\20\t\2\33\34\b\3\1\2\34"+
-		"\36\3\2\2\2\35\32\3\2\2\2\36!\3\2\2\2\37\35\3\2\2\2\37 \3\2\2\2 #\3\2"+
-		"\2\2!\37\3\2\2\2\"\31\3\2\2\2\"#\3\2\2\2#\'\3\2\2\2$%\5\6\4\2%&\b\3\1"+
-		"\2&(\3\2\2\2\'$\3\2\2\2()\3\2\2\2)\'\3\2\2\2)*\3\2\2\2*+\3\2\2\2+,\b\3"+
-		"\1\2,\5\3\2\2\2-.\5\f\7\2./\b\4\1\2/\64\3\2\2\2\60\61\5\b\5\2\61\62\b"+
-		"\4\1\2\62\64\3\2\2\2\63-\3\2\2\2\63\60\3\2\2\2\64\7\3\2\2\2\65\66\5\n"+
-		"\6\2\66\67\7\13\2\2\678\5\f\7\289\b\5\1\29\t\3\2\2\2:;\7\16\2\2;<\b\6"+
-		"\1\2<\13\3\2\2\2=>\b\7\1\2>?\5\16\b\2?@\b\7\1\2@M\3\2\2\2AB\f\5\2\2BC"+
-		"\7\7\2\2CD\5\16\b\2DE\b\7\1\2EL\3\2\2\2FG\f\4\2\2GH\7\b\2\2HI\5\16\b\2"+
-		"IJ\b\7\1\2JL\3\2\2\2KA\3\2\2\2KF\3\2\2\2LO\3\2\2\2MK\3\2\2\2MN\3\2\2\2"+
-		"N\r\3\2\2\2OM\3\2\2\2PQ\b\b\1\2QR\5\22\n\2RS\b\b\1\2Sq\3\2\2\2TU\7\5\2"+
-		"\2UV\5\16\b\2VW\7\t\2\2WX\5\f\7\2XY\7\6\2\2YZ\b\b\1\2Zq\3\2\2\2[\\\7\5"+
-		"\2\2\\]\5\16\b\2]^\7\n\2\2^_\5\f\7\2_`\7\6\2\2`a\b\b\1\2aq\3\2\2\2bc\7"+
-		"\5\2\2cd\5\16\b\2de\7\7\2\2ef\5\f\7\2fg\7\6\2\2gh\b\b\1\2hq\3\2\2\2ij"+
-		"\7\5\2\2jk\5\16\b\2kl\7\b\2\2lm\5\f\7\2mn\7\6\2\2no\b\b\1\2oq\3\2\2\2"+
-		"pP\3\2\2\2pT\3\2\2\2p[\3\2\2\2pb\3\2\2\2pi\3\2\2\2q~\3\2\2\2rs\f\6\2\2"+
-		"st\7\t\2\2tu\5\f\7\2uv\b\b\1\2v}\3\2\2\2wx\f\5\2\2xy\7\n\2\2yz\5\f\7\2"+
-		"z{\b\b\1\2{}\3\2\2\2|r\3\2\2\2|w\3\2\2\2}\u0080\3\2\2\2~|\3\2\2\2~\177"+
-		"\3\2\2\2\177\17\3\2\2\2\u0080~\3\2\2\2\u0081\u0082\7\16\2\2\u0082\u0083"+
-		"\b\t\1\2\u0083\21\3\2\2\2\u0084\u0085\7\20\2\2\u0085\u0086\b\n\1\2\u0086"+
-		"\23\3\2\2\2\13\37\")\63KMp|~";
+		"\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\7\3!\n\3\f\3\16\3$\13\3\5\3"+
+		"&\n\3\3\3\3\3\3\3\6\3+\n\3\r\3\16\3,\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\5"+
+		"\4\67\n\4\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7"+
+		"\3\7\3\7\3\7\3\7\3\7\3\7\3\7\7\7O\n\7\f\7\16\7R\13\7\3\b\3\b\3\b\3\b\3"+
+		"\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b"+
+		"\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5\bt\n\b\3\b\3\b\3\b\3\b\3\b"+
+		"\3\b\3\b\3\b\3\b\3\b\7\b\u0080\n\b\f\b\16\b\u0083\13\b\3\t\3\t\3\t\3\n"+
+		"\3\n\3\n\3\n\2\4\f\16\13\2\4\6\b\n\f\16\20\22\2\2\2\u008d\2\24\3\2\2\2"+
+		"\4\30\3\2\2\2\6\66\3\2\2\2\b8\3\2\2\2\n=\3\2\2\2\f@\3\2\2\2\16s\3\2\2"+
+		"\2\20\u0084\3\2\2\2\22\u0087\3\2\2\2\24\25\5\4\3\2\25\26\7\2\2\3\26\27"+
+		"\b\2\1\2\27\3\3\2\2\2\30%\b\3\1\2\31\32\7\f\2\2\32\33\5\20\t\2\33\"\b"+
+		"\3\1\2\34\35\7\r\2\2\35\36\5\20\t\2\36\37\b\3\1\2\37!\3\2\2\2 \34\3\2"+
+		"\2\2!$\3\2\2\2\" \3\2\2\2\"#\3\2\2\2#&\3\2\2\2$\"\3\2\2\2%\31\3\2\2\2"+
+		"%&\3\2\2\2&*\3\2\2\2\'(\5\6\4\2()\b\3\1\2)+\3\2\2\2*\'\3\2\2\2+,\3\2\2"+
+		"\2,*\3\2\2\2,-\3\2\2\2-.\3\2\2\2./\b\3\1\2/\5\3\2\2\2\60\61\5\f\7\2\61"+
+		"\62\b\4\1\2\62\67\3\2\2\2\63\64\5\b\5\2\64\65\b\4\1\2\65\67\3\2\2\2\66"+
+		"\60\3\2\2\2\66\63\3\2\2\2\67\7\3\2\2\289\5\n\6\29:\7\13\2\2:;\5\f\7\2"+
+		";<\b\5\1\2<\t\3\2\2\2=>\7\16\2\2>?\b\6\1\2?\13\3\2\2\2@A\b\7\1\2AB\5\16"+
+		"\b\2BC\b\7\1\2CP\3\2\2\2DE\f\5\2\2EF\7\7\2\2FG\5\16\b\2GH\b\7\1\2HO\3"+
+		"\2\2\2IJ\f\4\2\2JK\7\b\2\2KL\5\16\b\2LM\b\7\1\2MO\3\2\2\2ND\3\2\2\2NI"+
+		"\3\2\2\2OR\3\2\2\2PN\3\2\2\2PQ\3\2\2\2Q\r\3\2\2\2RP\3\2\2\2ST\b\b\1\2"+
+		"TU\5\22\n\2UV\b\b\1\2Vt\3\2\2\2WX\7\5\2\2XY\5\16\b\2YZ\7\t\2\2Z[\5\f\7"+
+		"\2[\\\7\6\2\2\\]\b\b\1\2]t\3\2\2\2^_\7\5\2\2_`\5\16\b\2`a\7\n\2\2ab\5"+
+		"\f\7\2bc\7\6\2\2cd\b\b\1\2dt\3\2\2\2ef\7\5\2\2fg\5\16\b\2gh\7\7\2\2hi"+
+		"\5\f\7\2ij\7\6\2\2jk\b\b\1\2kt\3\2\2\2lm\7\5\2\2mn\5\16\b\2no\7\b\2\2"+
+		"op\5\f\7\2pq\7\6\2\2qr\b\b\1\2rt\3\2\2\2sS\3\2\2\2sW\3\2\2\2s^\3\2\2\2"+
+		"se\3\2\2\2sl\3\2\2\2t\u0081\3\2\2\2uv\f\6\2\2vw\7\t\2\2wx\5\f\7\2xy\b"+
+		"\b\1\2y\u0080\3\2\2\2z{\f\5\2\2{|\7\n\2\2|}\5\f\7\2}~\b\b\1\2~\u0080\3"+
+		"\2\2\2\177u\3\2\2\2\177z\3\2\2\2\u0080\u0083\3\2\2\2\u0081\177\3\2\2\2"+
+		"\u0081\u0082\3\2\2\2\u0082\17\3\2\2\2\u0083\u0081\3\2\2\2\u0084\u0085"+
+		"\7\16\2\2\u0085\u0086\b\t\1\2\u0086\21\3\2\2\2\u0087\u0088\7\20\2\2\u0088"+
+		"\u0089\b\n\1\2\u0089\23\3\2\2\2\13\"%,\66NPs\177\u0081";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
