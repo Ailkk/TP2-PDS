@@ -1,2 +1,0 @@
-TP2/SymbolTableTest.java
- TP2.SymbolTableTest

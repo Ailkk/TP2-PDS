@@ -51,20 +51,22 @@ public class Bloc {
     // IR generation
     public RetBloc toIR(SymbolTable st) throws TypeException {
     	
+    	
       Llvm.IR irBlock = new  Llvm.IR(Llvm.empty(), Llvm.empty());
+      
+      Llvm.Instruction commmentBlockD = new Llvm.Bloc("Test Bloc Début");
+      irBlock.appendCode(commmentBlockD);
      
-      /*
       Variable.RetVariable retVar = null;
       
       for(Variable variable : this.v) {
-          if(retVar == null) retVar = variable.toIR(scope, func);
-          else retVar.ir.append(variable.toIR(scope, func).ir);
+          if(retVar == null) retVar = variable.toIR(st);
+          else retVar.ir.append(variable.toIR(st).ir);
       }
 
       if(retVar != null) irBlock.append(retVar.ir);
-*/
-      Llvm.Instruction commmentBlockD = new Llvm.Bloc("Test Bloc Début");
-      irBlock.appendCode(commmentBlockD);
+
+
 
       String lastExprRes = "0";
       Type lastTypeRes = new Int();
