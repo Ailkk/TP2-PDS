@@ -16,7 +16,7 @@ public abstract class Variable {
     }
 
     public abstract String pp();
-    public abstract RetVariable toIR(SymbolTable st);
+    public abstract RetVariable toIR(SymbolTable st) throws TypeException;
     
     
     public class RetVariable {
@@ -25,6 +25,8 @@ public abstract class Variable {
         public Type type;
         public String result;
 
+        
+        
         public RetVariable(Llvm.IR ir, Type type, String result) {
             this.ir = ir;
             this.type = type;

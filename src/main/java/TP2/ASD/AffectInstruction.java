@@ -28,6 +28,13 @@ public class AffectInstruction extends Statement {
 	      if(!leftRet.type.equals(rightRet.type)) {
 	        throw new TypeException("type mismatch: have " + leftRet.type + " and " + rightRet.type);
 	      }
+	      SymbolTable.VariableSymbol symbol = new SymbolTable.VariableSymbol(new Int(), leftRet.result);
+	      
+	      
+	      if(st.add(symbol)) {
+	    	  st.remove(leftRet.result);
+	    	throw new TypeException("mismatch: " + leftRet.result + " is not in SymbolTable");
+	      }
 
 	      // We base our build on the left generated IR:
 	      // append right code

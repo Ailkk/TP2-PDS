@@ -225,6 +225,26 @@ public class Llvm {
 	  
   }
   
+  static public class Load extends Instruction {
+	String varI;
+	Type typeI;
+	String var;
+	Type type;
+    
+    public Load(String vi, Type ti, String v, Type t) {
+    	this.var=v;
+    	this.type=t;
+    	this.typeI=ti;
+    	this.varI=vi;
+    	
+    }
+
+	public String toString() {
+		return this.varI + " = load " + this.typeI + ", " + this.type + "* " + this.var + "\n";
+	}
+	  
+  }
+  
   
   static public class Bloc extends Instruction{
 	  String value;

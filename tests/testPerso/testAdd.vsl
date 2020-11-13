@@ -1,2 +1,4 @@
-INT y, x, u
-y:=6
+INT x, y
+y:=5
+x:=9
+x:=x + y

@@ -63,5 +63,6 @@ variable returns [TP2.ASD.Variable out]
 	
 primary returns [TP2.ASD.Expression out]
     : INTEGER { $out = new TP2.ASD.IntegerExpression($INTEGER.int); }
+    | IDENT { $out = new TP2.ASD.VariableExpression($IDENT.text); }
     // TODO : that's all?
     ;

@@ -21,7 +21,7 @@ public class SymbolTable {
   }
 
   public static class VariableSymbol extends Symbol {
-    Type type;
+    public Type type;
 
     public VariableSymbol(Type type, String ident) {
       this.type = type;
