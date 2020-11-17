@@ -32,6 +32,8 @@ TP2/ASD/Type.java
  TP2.ASD.Type
 TP2/ASD/SubExpression.java
  TP2.ASD.SubExpression
+TP2/ASD/VariableExpression.java
+ TP2.ASD.VariableExpression
 TP2/ASD/AddExpression.java
  TP2.ASD.AddExpression
 TP2/Llvm.java
@@ -45,6 +47,7 @@ TP2/Llvm.java
  TP2.Llvm$IR
  TP2.Llvm$Instruction
  TP2.Llvm$Int
+ TP2.Llvm$Load
  TP2.Llvm$Mul
  TP2.Llvm$Return
  TP2.Llvm$Sub

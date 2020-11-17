@@ -2,6 +2,7 @@ package TP2.ASD;
 
 import TP2.Llvm;
 import TP2.SymbolTable;
+import TP2.TypeException;
 
 public class IntegerVariable extends Variable {
 
@@ -16,7 +17,7 @@ public class IntegerVariable extends Variable {
 	}
 
 	@Override
-	public RetVariable toIR(SymbolTable st) {
+	public RetVariable toIR(SymbolTable st) throws TypeException {
 		
 		SymbolTable.VariableSymbol symbol = new SymbolTable.VariableSymbol(new Int(), super.name);
         String result = "%" + super.name;
@@ -24,6 +25,7 @@ public class IntegerVariable extends Variable {
         RetVariable ret = new RetVariable(new Llvm.IR(Llvm.empty(), Llvm.empty()), new Int(), result);
         
         st.add(symbol);
+       
         
         Llvm.Instruction alloca = new Llvm.Alloc(new Int().toLlvmType(), result);
 
