@@ -225,6 +225,26 @@ public class Llvm {
 	  
   }
   
+  static public class Load extends Instruction {
+	String varI;
+	Type typeI;
+	String var;
+	Type type;
+    
+    public Load(String vi, Type ti, String v, Type t) {
+    	this.var=v;
+    	this.type=t;
+    	this.typeI=ti;
+    	this.varI=vi;
+    	
+    }
+
+	public String toString() {
+		return this.varI + " = load " + this.typeI + ", " + this.type + "* " + this.var + "\n";
+	}
+	  
+  }
+  
   
   static public class Bloc extends Instruction{
 	  String value;
@@ -254,6 +274,50 @@ public class Llvm {
           return ret + "\n";
       }
   }
+  
+  
+  //Conparaison dans la condition du IF
+  static public class ConditionIf extends Instruction {
+	  //Type
+	  Type type;
+	  
+	  //valeur a comparer
+	  String value;
+	  
+	  //Resultat Indermediaire
+      String resI;
+      
+      public ConditionIf(String ri , Type t , String v) {
+          this.type=t;
+          this.resI=ri;
+          this.value=v;
+      }
+      
+      public String toString() {
+    	  return this.resI + " = icmp ne " + this.type + " " + this.value + ", " + "0"  + "\n";
+      }
+  }
+  
+  
+  //Redirection dans IF
+  static public class Redirection extends Instruction {
+	  String condition;
+	  
+	  String ifLabel;
+	  
+	  String sinonLabel;
+	  
+	  public Redirection(String c, String i, String s) {
+		  this.condition=c;
+		  this.ifLabel=i;
+		  this.sinonLabel=s;
+	  }
+	  
+	  public String toString() {
+		  return "br i1 " + this.condition + " , label " + this.sinonLabel + " , label " + this.sinonLabel + "\n";
+	  }
+  }
+
 
   // TODO : other instructions
 }

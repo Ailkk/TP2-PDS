@@ -20,8 +20,8 @@ fragment ASCII  : ~('\n'|'"');
 
 
 // keywords
-LP    : '(' ; // Left parenthesis
-RP    : ')' ;
+LP    : '('      ;
+RP    : ')'      ;
 PLUS  : '+'      ;
 MOINS : '-'      ;
 MULTI : '*'      ;
@@ -29,7 +29,9 @@ DIVI  : '/'      ;
 EGAL  : ':='     ;
 INT	  : 'INT'    ;
 VIRG  : ','      ;
-
+IF	  : 'IF'     ;
+THEN  : 'THEN'   ;
+ELSE  : 'ELSE'   ;
 
 // TODO : other keywords
 

@@ -60,6 +60,8 @@ variable returns [TP2.ASD.Variable out]
 	:IDENT { $out = new TP2.ASD.IntegerVariable($IDENT.text);}
 	;
 
+if returns [TP2.ASD.IfElseInstruction out]
+	:IF LP {?????} RP THEN {???} ELSE {????}
 	
 primary returns [TP2.ASD.Expression out]
     : INTEGER { $out = new TP2.ASD.IntegerExpression($INTEGER.int); }
