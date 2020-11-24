@@ -13,9 +13,9 @@ public class Ident extends Expression {
       return "" + value;
     }
 
-    public RetStatement toIR(SymbolTable st) {
+    public RetExpression toIR(SymbolTable st) {
       // Here we simply return an empty IR
       // the `result' of this expression is the integer itself (as string)
-      return new RetStatement(new Llvm.IR(Llvm.empty(), Llvm.empty()), new Int(), "" + value);
+      return new RetExpression(new Llvm.IR(Llvm.empty(), Llvm.empty()), new Int(), "" + value);
     }
 }

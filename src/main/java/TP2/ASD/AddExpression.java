@@ -21,9 +21,9 @@ import TP2.Utils;
     }
 
     // IR generation
-    public RetStatement toIR(SymbolTable st) throws TypeException {
-      RetStatement leftRet = left.toIR(st);
-      RetStatement rightRet = right.toIR(st);
+    public RetExpression toIR(SymbolTable st) throws TypeException {
+      RetExpression leftRet = left.toIR(st);
+      RetExpression rightRet = right.toIR(st);
 
       // We check if the types mismatches
       if(!leftRet.type.equals(rightRet.type)) {
@@ -45,6 +45,6 @@ import TP2.Utils;
 
       // return the generated IR, plus the type of this expression
       // and where to find its result
-      return new RetStatement(leftRet.ir, leftRet.type, result);
+      return new RetExpression(leftRet.ir, leftRet.type, result);
     }
   }

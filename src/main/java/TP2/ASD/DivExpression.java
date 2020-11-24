@@ -21,9 +21,9 @@ import TP2.Utils;
     }
 
     // IR generation
-    public RetStatement toIR(SymbolTable st) throws TypeException {
-      RetStatement leftRet = left.toIR(st);
-      RetStatement rightRet = right.toIR(st);
+    public RetExpression toIR(SymbolTable st) throws TypeException {
+    	RetExpression leftRet = left.toIR(st);
+    	RetExpression rightRet = right.toIR(st);
 
       if(!leftRet.type.equals(rightRet.type)) {
         throw new TypeException("type mismatch: have " + leftRet.type + " and " + rightRet.type);
@@ -37,6 +37,6 @@ import TP2.Utils;
 
       leftRet.ir.appendCode(div);
 
-      return new RetStatement(leftRet.ir, leftRet.type, result);
+      return new RetExpression(leftRet.ir, leftRet.type, result);
     }
   }

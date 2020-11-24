@@ -317,6 +317,23 @@ public class Llvm {
 		  return "br i1 " + this.condition + " , label " + this.sinonLabel + " , label " + this.sinonLabel + "\n";
 	  }
   }
+  
+  static int compteurLabel=0;
+  
+  static public class Label extends Instruction{
+
+	  String name;
+	  
+	  public Label (String n) {
+		  this.name=n;
+	  }
+	@Override
+	public String toString() {
+		compteurLabel+=1;
+		return this.name + compteurLabel + ": \n";
+	}
+	  
+  }
 
 
   // TODO : other instructions

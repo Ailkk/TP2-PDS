@@ -17,7 +17,7 @@ public class VariableExpression extends Expression {
 		return "" + value;
 	}
 
-	public RetStatement toIR(SymbolTable st) throws TypeException {
+	public RetExpression toIR(SymbolTable st) throws TypeException {
 		// Here we simply return an empty IR
 		// the `result' of this expression is the integer itself (as string)
 		SymbolTable.VariableSymbol identSymbol = (SymbolTable.VariableSymbol) st.lookup(this.value);
@@ -43,7 +43,7 @@ public class VariableExpression extends Expression {
 
 			//return new RetStatement(new Llvm.IR(Llvm.empty(), Llvm.empty()), new Int(), "" + value);
 			
-			RetStatement ret = new RetStatement(new Llvm.IR(Llvm.empty(), Llvm.empty()), new Int(), result);
+			RetExpression ret = new RetExpression(new Llvm.IR(Llvm.empty(), Llvm.empty()), new Int(), result);
 
             Llvm.Instruction load = new Llvm.Load(result, identSymbol.type.toLlvmType(),  ident, identSymbol.type.toLlvmType());
 

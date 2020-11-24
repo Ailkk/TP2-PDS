@@ -4,8 +4,10 @@ import TP2.Llvm;
 import TP2.SymbolTable;
 import TP2.TypeException;
 import TP2.Utils;
+import TP2.ASD.Expression.RetExpression;
+import TP2.ASD.Statement.RetStatement;
 
-public class AffectInstruction extends Statement {
+public class AffectInstruction extends InstructionIf {
 	Ident left;
 	Expression right;
 
@@ -20,9 +22,9 @@ public class AffectInstruction extends Statement {
 	}
 
 	@Override
-	public RetStatement toIR(SymbolTable st) throws TypeException {
-		 RetStatement leftRet = left.toIR(st);
-	     RetStatement rightRet = right.toIR(st);
+	public RetInstructionIf toIR(SymbolTable st) throws TypeException {
+		 RetExpression leftRet = left.toIR(st);
+	     RetExpression rightRet = right.toIR(st);
 
 	      // We check if the types mismatches
 	      if(!leftRet.type.equals(rightRet.type)) {
@@ -51,6 +53,6 @@ public class AffectInstruction extends Statement {
 
 	      // return the generated IR, plus the type of this expression
 	      // and where to find its result
-	      return new RetStatement(leftRet.ir, leftRet.type, result);
+	      return new RetInstructionIf(leftRet.ir, result);
 	}
 }
