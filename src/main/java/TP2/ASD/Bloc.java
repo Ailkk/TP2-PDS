@@ -7,7 +7,7 @@ import TP2.SymbolTable;
 import TP2.TypeException;
 
 public class Bloc {
-    List<Statement> sl;
+    List<Instruction> sl;
     List<Variable> v;
 
     static public class RetBloc {
@@ -24,7 +24,7 @@ public class Bloc {
 
     }
 
-   public Bloc(List<Variable> var, List<Statement> sl) {
+   public Bloc(List<Variable> var, List<Instruction> sl) {
       this.v = var;
       this.sl = sl;
     }
@@ -41,7 +41,7 @@ public class Bloc {
         affiche += vari.pp();
       }
 
-      for(Statement s : sl) {
+      for(Instruction s : sl) {
         affiche += s.pp();
       }
       return affiche;
@@ -70,16 +70,16 @@ public class Bloc {
 
       String lastExprRes = "0";
       Type lastTypeRes = new Int();
-      // TODO : change when you extend the language
+      
 
       // computes the IR of the expression
 
       //For tout les statements
-      for (Statement s : sl) {
-        Statement.RetStatement retStmt = s.toIR(st);
+      for (Instruction s : sl) {
+    	  Instruction.RetInstruction retStmt = s.toIR(st);
         irBlock.append(retStmt.ir);
         lastExprRes = retStmt.result;
-        lastTypeRes = retStmt.type;
+        //lastTypeRes = retStmt.type;
       }
       //Fin du For
       commmentBlockD = new Llvm.Bloc("Test Bloc Fin");

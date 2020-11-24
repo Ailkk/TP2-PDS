@@ -24,7 +24,7 @@ public class VSLParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		WS=1, COMMENT=2, LP=3, RP=4, PLUS=5, MOINS=6, MULTI=7, DIVI=8, EGAL=9, 
-		INT=10, VIRG=11, IDENT=12, TEXT=13, INTEGER=14;
+		INT=10, VIRG=11, IF=12, THEN=13, ELSE=14, FI=15, IDENT=16, TEXT=17, INTEGER=18;
 	public static final int
 		RULE_program = 0, RULE_bloc = 1, RULE_statement = 2, RULE_assignment = 3, 
 		RULE_id = 4, RULE_expression = 5, RULE_factor = 6, RULE_variable = 7, 
@@ -36,11 +36,11 @@ public class VSLParser extends Parser {
 
 	private static final String[] _LITERAL_NAMES = {
 		null, null, null, "'('", "')'", "'+'", "'-'", "'*'", "'/'", "':='", "'INT'", 
-		"','"
+		"','", "'IF'", "'THEN'", "'ELSE'", "'FI'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, "WS", "COMMENT", "LP", "RP", "PLUS", "MOINS", "MULTI", "DIVI", "EGAL", 
-		"INT", "VIRG", "IDENT", "TEXT", "INTEGER"
+		"INT", "VIRG", "IF", "THEN", "ELSE", "FI", "IDENT", "TEXT", "INTEGER"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -735,7 +735,7 @@ public class VSLParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\20\u008e\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\24\u008e\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\3"+
 		"\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\7\3!\n\3\f\3\16\3$\13\3\5\3"+
 		"&\n\3\3\3\3\3\3\3\6\3+\n\3\r\3\16\3,\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\5"+
@@ -754,7 +754,7 @@ public class VSLParser extends Parser {
 		"\3\2\2\2+,\3\2\2\2,*\3\2\2\2,-\3\2\2\2-.\3\2\2\2./\b\3\1\2/\5\3\2\2\2"+
 		"\60\61\5\f\7\2\61\62\b\4\1\2\62\67\3\2\2\2\63\64\5\b\5\2\64\65\b\4\1\2"+
 		"\65\67\3\2\2\2\66\60\3\2\2\2\66\63\3\2\2\2\67\7\3\2\2\289\5\n\6\29:\7"+
-		"\13\2\2:;\5\f\7\2;<\b\5\1\2<\t\3\2\2\2=>\7\16\2\2>?\b\6\1\2?\13\3\2\2"+
+		"\13\2\2:;\5\f\7\2;<\b\5\1\2<\t\3\2\2\2=>\7\22\2\2>?\b\6\1\2?\13\3\2\2"+
 		"\2@A\b\7\1\2AB\5\16\b\2BC\b\7\1\2CP\3\2\2\2DE\f\5\2\2EF\7\7\2\2FG\5\16"+
 		"\b\2GH\b\7\1\2HO\3\2\2\2IJ\f\4\2\2JK\7\b\2\2KL\5\16\b\2LM\b\7\1\2MO\3"+
 		"\2\2\2ND\3\2\2\2NI\3\2\2\2OR\3\2\2\2PN\3\2\2\2PQ\3\2\2\2Q\r\3\2\2\2RP"+
@@ -767,8 +767,8 @@ public class VSLParser extends Parser {
 		"wx\5\f\7\2xy\b\b\1\2y\u0080\3\2\2\2z{\f\5\2\2{|\7\n\2\2|}\5\f\7\2}~\b"+
 		"\b\1\2~\u0080\3\2\2\2\177u\3\2\2\2\177z\3\2\2\2\u0080\u0083\3\2\2\2\u0081"+
 		"\177\3\2\2\2\u0081\u0082\3\2\2\2\u0082\17\3\2\2\2\u0083\u0081\3\2\2\2"+
-		"\u0084\u0085\7\16\2\2\u0085\u0086\b\t\1\2\u0086\21\3\2\2\2\u0087\u0088"+
-		"\7\20\2\2\u0088\u008c\b\n\1\2\u0089\u008a\7\16\2\2\u008a\u008c\b\n\1\2"+
+		"\u0084\u0085\7\22\2\2\u0085\u0086\b\t\1\2\u0086\21\3\2\2\2\u0087\u0088"+
+		"\7\24\2\2\u0088\u008c\b\n\1\2\u0089\u008a\7\22\2\2\u008a\u008c\b\n\1\2"+
 		"\u008b\u0087\3\2\2\2\u008b\u0089\3\2\2\2\u008c\23\3\2\2\2\f\"%,\66NPs"+
 		"\177\u0081\u008b";
 	public static final ATN _ATN =

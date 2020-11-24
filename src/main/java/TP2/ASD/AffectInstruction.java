@@ -7,7 +7,7 @@ import TP2.Utils;
 import TP2.ASD.Expression.RetExpression;
 import TP2.ASD.Statement.RetStatement;
 
-public class AffectInstruction extends InstructionIf {
+public class AffectInstruction extends Instruction {
 	Ident left;
 	Expression right;
 
@@ -22,7 +22,7 @@ public class AffectInstruction extends InstructionIf {
 	}
 
 	@Override
-	public RetInstructionIf toIR(SymbolTable st) throws TypeException {
+	public RetInstruction toIR(SymbolTable st) throws TypeException {
 		 RetExpression leftRet = left.toIR(st);
 	     RetExpression rightRet = right.toIR(st);
 
@@ -53,6 +53,6 @@ public class AffectInstruction extends InstructionIf {
 
 	      // return the generated IR, plus the type of this expression
 	      // and where to find its result
-	      return new RetInstructionIf(leftRet.ir, result);
+	      return new RetInstruction(leftRet.ir, result);
 	}
 }

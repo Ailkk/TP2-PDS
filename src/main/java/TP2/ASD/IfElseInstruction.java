@@ -4,10 +4,12 @@ import TP2.Llvm;
 import TP2.SymbolTable;
 import TP2.TypeException;
 import TP2.Utils;
+import TP2.ASD.Expression.RetExpression;
+import TP2.ASD.Instruction.RetInstruction;
 import TP2.ASD.Statement.RetStatement;
 //import sun.tools.tree.TypeExpression;
 
-public class IfElseInstruction {
+public class IfElseInstruction extends Instruction {
 
 	//La condition
 	Expression expr;
@@ -36,10 +38,15 @@ public class IfElseInstruction {
              ret += this.bloc2.pp();
          }
 
-         return ret /*+ Utils.indent(level)*/ + "\nFI";
+         return ret /*+ Utils.indent(level)*/ + "\n FI";
      }
-	 RetStatement toIR(SymbolTable st) throws TypeException {
-		RetStatement condition = this.expr.toIR(st);
+	 
+	 
+	 
+	 
+	 public RetInstruction toIR(SymbolTable st) throws TypeException {	 
+		 
+		RetExpression condition = this.expr.toIR(st);
 		Int typeInt = new Int();
 		if(!condition.type.equals(typeInt)) {
 			throw new TypeException("type mismatch: have " + condition.type + " and " + typeInt);
@@ -71,19 +78,19 @@ public class IfElseInstruction {
         ret.ir.append(condition.ir);
         ret.ir.appendCode(icmp);
         ret.ir.appendCode(brCond);
+        ret.ir.appendCode(new Llvm.Label(debutSi));
         //je comprends pas comment ajuster cette ligne
-        //ret.ir.appendCode(new Llvm.Label(si));
-        ret.ir.append(this.bloc1.toIR(st));
+        ret.ir.append(this.bloc1.toIR(st).ir);
         ret.ir.appendCode(brUncond);
 
         if(this.bloc2 != null) {//Si il y a un else
             //Pareil
-        	//ret.ir.appendCode(new Llvm.Label(sinon));
-            ret.ir.append(this.bloc2.toIR(st));
+        	ret.ir.appendCode(new Llvm.Label(sinon));
+            ret.ir.append(this.bloc2.toIR(st).ir);
             ret.ir.appendCode(brUncond);
         }
 
-        ret.ir.appendCode(new Llvm.Label(finsi));
+        ret.ir.appendCode(new Llvm.Label(finSi));
 
         return ret;
 	 }

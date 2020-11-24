@@ -26,9 +26,10 @@ bloc returns [TP2.ASD.Bloc out]
 	(s=statement {l.add($s.out);} )+ { $out = new TP2.ASD.Bloc(r,l);}
 	;
 
-statement returns [TP2.ASD.Statement out]
+instruction returns [TP2.ASD.Instruction out]
     : e=expression { $out = $e.out; }
     | a=assignment { $out = $a.out; }
+    | i=if { $out = $i.out; }
     ;
 
 assignment returns [TP2.ASD.AffectInstruction out]
@@ -61,7 +62,8 @@ variable returns [TP2.ASD.Variable out]
 	;
 
 if returns [TP2.ASD.IfElseInstruction out]
-	:IF LP {?????} RP THEN {???} ELSE {????}
+	:IF e=expression THEN b1=bloc ELSE b2=bloc FI { $out.add(new ASD.IfElseInstruction($e.out, $b1.out, $b2.out)); }
+	|IF e=expression THEN b1=bloc FI { $out.add(new ASD.IfElseInstruction($e.out, $b1.out,null)); }
 	
 primary returns [TP2.ASD.Expression out]
     : INTEGER { $out = new TP2.ASD.IntegerExpression($INTEGER.int); }

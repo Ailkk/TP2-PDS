@@ -32,6 +32,7 @@ VIRG  : ','      ;
 IF	  : 'IF'     ;
 THEN  : 'THEN'   ;
 ELSE  : 'ELSE'   ;
+FI	  : 'FI'	 ;
 
 // TODO : other keywords
 
