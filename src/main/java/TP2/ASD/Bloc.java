@@ -54,8 +54,8 @@ public class Bloc {
     	
       Llvm.IR irBlock = new  Llvm.IR(Llvm.empty(), Llvm.empty());
       
-      Llvm.Instruction commmentBlockD = new Llvm.Bloc("Test Bloc Début");
-      irBlock.appendCode(commmentBlockD);
+      //Llvm.Instruction commmentBlockD = new Llvm.Bloc("Test Bloc Début");
+      //irBlock.appendCode(commmentBlockD);
      
       Variable.RetVariable retVar = null;
       
@@ -81,9 +81,10 @@ public class Bloc {
         lastExprRes = retStmt.result;
         //lastTypeRes = retStmt.type;
       }
+      
       //Fin du For
-      commmentBlockD = new Llvm.Bloc("Test Bloc Fin");
-      irBlock.appendCode(commmentBlockD);
+      //commmentBlockD = new Llvm.Bloc("Test Bloc Fin");
+      //irBlock.appendCode(commmentBlockD);
 
       return new RetBloc(irBlock, lastTypeRes, lastExprRes);
     }

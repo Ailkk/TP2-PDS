@@ -2,3 +2,8 @@ INT x, y
 y:=5
 x:=9
 x:=x + y
+
+IF x + 9
+THEN
+x:=x+1
+FI

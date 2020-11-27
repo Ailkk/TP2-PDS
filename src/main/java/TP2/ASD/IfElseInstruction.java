@@ -71,7 +71,7 @@ public class IfElseInstruction extends Instruction {
             brCond = new Llvm.Redirection(res, "%" + debutSi, "%" + finSi);
         }
 
-        Llvm.Instruction brUncond = new Llvm.Redirection(res, "%" + sinon, "%" + finSi);
+        Llvm.Instruction brFinSi = new Llvm.RedirectionFin(finSi);
 
         RetInstruction ret = new RetInstruction(new Llvm.IR(Llvm.empty(), Llvm.empty()), res);
 
@@ -81,13 +81,13 @@ public class IfElseInstruction extends Instruction {
         ret.ir.appendCode(new Llvm.Label(debutSi));
         //je comprends pas comment ajuster cette ligne
         ret.ir.append(this.bloc1.toIR(st).ir);
-        ret.ir.appendCode(brUncond);
+        ret.ir.appendCode(brFinSi);
 
         if(this.bloc2 != null) {//Si il y a un else
             //Pareil
         	ret.ir.appendCode(new Llvm.Label(sinon));
             ret.ir.append(this.bloc2.toIR(st).ir);
-            ret.ir.appendCode(brUncond);
+            ret.ir.appendCode(brFinSi);
         }
 
         ret.ir.appendCode(new Llvm.Label(finSi));

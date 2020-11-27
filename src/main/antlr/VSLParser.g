@@ -21,15 +21,14 @@ program returns [TP2.ASD.Program out]
     ;
     
 bloc returns [TP2.ASD.Bloc out]
-	: {List<TP2.ASD.Statement> l = new ArrayList(); List<TP2.ASD.Variable> r = new ArrayList(); }
+	: {List<TP2.ASD.Instruction> l = new ArrayList(); List<TP2.ASD.Variable> r = new ArrayList(); }
 	(INT v=variable {r.add($v.out);}  ( VIRG v=variable {r.add($v.out);} )* )?
-	(s=statement {l.add($s.out);} )+ { $out = new TP2.ASD.Bloc(r,l);}
+	(ins=instruction {l.add($ins.out);} )+ { $out = new TP2.ASD.Bloc(r,l);}
 	;
 
 instruction returns [TP2.ASD.Instruction out]
-    : e=expression { $out = $e.out; }
-    | a=assignment { $out = $a.out; }
-    | i=if { $out = $i.out; }
+    : a=assignment { $out = $a.out; }
+    | i=sialors { $out = $i.out; }
     ;
 
 assignment returns [TP2.ASD.AffectInstruction out]
@@ -61,9 +60,10 @@ variable returns [TP2.ASD.Variable out]
 	:IDENT { $out = new TP2.ASD.IntegerVariable($IDENT.text);}
 	;
 
-if returns [TP2.ASD.IfElseInstruction out]
-	:IF e=expression THEN b1=bloc ELSE b2=bloc FI { $out.add(new ASD.IfElseInstruction($e.out, $b1.out, $b2.out)); }
-	|IF e=expression THEN b1=bloc FI { $out.add(new ASD.IfElseInstruction($e.out, $b1.out,null)); }
+sialors returns [TP2.ASD.IfElseInstruction out]
+	:IF e=expression THEN b1=bloc ELSE b2=bloc FI { $out = new TP2.ASD.IfElseInstruction($e.out, $b1.out, $b2.out); }
+	|IF e=expression THEN b1=bloc FI { $out = new TP2.ASD.IfElseInstruction($e.out, $b1.out,null); }
+	;
 	
 primary returns [TP2.ASD.Expression out]
     : INTEGER { $out = new TP2.ASD.IntegerExpression($INTEGER.int); }

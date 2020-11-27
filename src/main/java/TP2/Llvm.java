@@ -314,8 +314,21 @@ public class Llvm {
 	  }
 	  
 	  public String toString() {
-		  return "br i1 " + this.condition + " , label " + this.sinonLabel + " , label " + this.sinonLabel + "\n";
+		  return "br i1 " + this.condition + " , label " + this.ifLabel + " , label " + this.sinonLabel + "\n";
 	  }
+  }
+  
+  static public class RedirectionFin extends Instruction {
+	  String finLabel;
+	  
+	  public RedirectionFin(String fL) {
+		  this.finLabel = fL;
+	  }
+	@Override
+	public String toString() {
+		return "br label "+ finLabel + "\n";
+	}
+	  
   }
   
   static int compteurLabel=0;
@@ -330,7 +343,7 @@ public class Llvm {
 	@Override
 	public String toString() {
 		compteurLabel+=1;
-		return this.name + compteurLabel + ": \n";
+		return this.name /*+ compteurLabel*/ + ": \n";
 	}
 	  
   }
