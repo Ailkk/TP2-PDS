@@ -17,6 +17,7 @@ TP2/ASD/Int.java
 TP2/ASD/Statement.java
  TP2.ASD.Statement
  TP2.ASD.Statement$RetStatement
+<<<<<<< HEAD
 TP2/VSLParser.java
  TP2.VSLParser
  TP2.VSLParser$AssignmentContext
@@ -29,6 +30,8 @@ TP2/VSLParser.java
  TP2.VSLParser$ProgramContext
  TP2.VSLParser$SialorsContext
  TP2.VSLParser$VariableContext
+=======
+>>>>>>> 70d98c97461f5c72913bca07b5b743e84ce63889
 TP2/ASD/Type.java
  TP2.ASD.Type
 TP2/ASD/SubExpression.java
@@ -53,7 +56,10 @@ TP2/Llvm.java
  TP2.Llvm$Load
  TP2.Llvm$Mul
  TP2.Llvm$Redirection
+<<<<<<< HEAD
  TP2.Llvm$RedirectionFin
+=======
+>>>>>>> 70d98c97461f5c72913bca07b5b743e84ce63889
  TP2.Llvm$Return
  TP2.Llvm$Sub
  TP2.Llvm$Type
