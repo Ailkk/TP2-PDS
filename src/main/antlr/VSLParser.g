@@ -29,6 +29,7 @@ bloc returns [TP2.ASD.Bloc out]
 instruction returns [TP2.ASD.Instruction out]
     : a=assignment { $out = $a.out; }
     | i=sialors { $out = $i.out; }
+    | w = tantque { $out = $w.out; }
     ;
 
 assignment returns [TP2.ASD.AffectInstruction out]
@@ -65,6 +66,10 @@ sialors returns [TP2.ASD.IfElseInstruction out]
 	|IF e=expression THEN b1=bloc FI { $out = new TP2.ASD.IfElseInstruction($e.out, $b1.out,null); }
 	;
 	
+tantque returns [TP2.ASD.WhileInstruction out]
+	: WHILE e=expression DO LA b=bloc RA DONE { $out = new TP2.ASD.WhileInstruction($e.out, $b.out); }
+	;
+
 primary returns [TP2.ASD.Expression out]
     : INTEGER { $out = new TP2.ASD.IntegerExpression($INTEGER.int); }
     | IDENT { $out = new TP2.ASD.VariableExpression($IDENT.text); }

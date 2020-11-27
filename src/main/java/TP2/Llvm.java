@@ -298,6 +298,22 @@ public class Llvm {
       }
   }
   
+  static public class ConditionWhile extends Instruction {
+	  Type type;
+	  
+	  String value, resInter;
+	  
+	  public ConditionWhile(String ri, Type t, String v) {
+		  this.resInter = ri;
+		  this.type = t;
+		  this.value = v;
+	  }
+	  
+	  public String toString() {
+		  return this.resInter + " = icmp ne " + this.type + " " + this.value + ", " + "0" + "\n";
+	  }
+  }
+  
   
   //Redirection dans IF
   static public class Redirection extends Instruction {

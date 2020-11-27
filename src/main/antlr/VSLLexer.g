@@ -22,6 +22,8 @@ fragment ASCII  : ~('\n'|'"');
 // keywords
 LP    : '('      ;
 RP    : ')'      ;
+LA    : '{'      ;
+RA    : '}'      ;
 PLUS  : '+'      ;
 MOINS : '-'      ;
 MULTI : '*'      ;
@@ -33,6 +35,9 @@ IF	  : 'IF'     ;
 THEN  : 'THEN'   ;
 ELSE  : 'ELSE'   ;
 FI	  : 'FI'	 ;
+WHILE : 'WHILE'  ;
+DO    : 'DO'     ;
+DONE  : 'DONE'   ;
 
 // TODO : other keywords
 
