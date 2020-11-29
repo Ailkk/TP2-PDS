@@ -8,11 +8,12 @@ import TP2.TypeException;
 import TP2.ASD.Bloc.RetBloc;
 
 public class Program {
-	List<Function> functions;
 	List<Prototype> prototypes;
+	List<Function> functions;
+
 	// What a program contains. TODO : change when you extend the language
 
-    public Program(List<Function> f, List<Prototype> p) {
+    public Program(List<Prototype> p, List<Function> f) {
       this.functions = f;
       this.prototypes = p;
     }

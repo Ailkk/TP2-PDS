@@ -17,7 +17,22 @@ options {
 // TODO : other rules
 
 program returns [TP2.ASD.Program out]
-	: p = prototype f = function EOF {$out = new TP2.ASD.Program($p.out, $f.out);}
+	: p=prototype  f=function EOF {$out = new TP2.ASD.Program($p.out, $f.out);}
+	;
+
+prototype returns [List<TP2.ADS.Prototype> out] locals [String ident, List<String> declarations]
+	: { $out = new ArrayList<TP2.ASD.Prototype>(); }
+	( { $declarations = new ArrayList<String>(); }
+	( PROTO INT IDENT {$ident = $IDENT.text; } LP (( IDENT {$declarations.add($IDENT.text); }) (VIRG IDENT {$declarations.add($IDENT.text);})*)? RP { $out.add(new TP2.ASD.Prototype($ident, $declarations, new TP2.ASD.Int())); }
+	| PROTO INT IDENT {$ident = $IDENT.text; } LP (( IDENT {$declarations.add($IDENT.text); }) (VIRG IDENT {$declarations.add($IDENT.text);})*)? RP { $out.add(new TP2.ASD.Prototype($ident, $declarations, new TP2.ASD.Int())); }))*
+	;
+	
+	
+function returns [List<TP2.ASD.Function> out] locals [String ident, TP2.ASD.Type type, List<String> declarations, TP2.ASD.Instruction inst]
+	: { $out = new ArrayList<TP2.ASD.Function>(); }
+	( { $declarations = new ArrayList<Stirng>(); }
+	( FUNC INT IDENT {$ident = $IDENT.text; } LP (( IDENT {$declarations.add($IDENT.text); }) (VIRG IDENT {$declarations.add($IDENT.text);})*)? RP ins = instruction { $out.add(new TP2.ASD.Function($ident, new TP2.ADS.Int(), $declarations, $ins.out)); }
+	| FUNC VOID IDENT {$ident = $IDENT.text; } LP (( IDENT {$declarations.add($IDENT.text); }) (VIRG IDENT {$declarations.add($IDENT.text);})*)? RP ins = instruction { $out.add(new TP2.ASD.Function($ident, new TP2.ADS.VoidType(), $declarations, $ins.out)); }))+
 	;
 
 bloc returns [TP2.ASD.Bloc out]
@@ -30,6 +45,7 @@ instruction returns [TP2.ASD.Instruction out]
     : a=assignment { $out = $a.out; }
     | i=sialors { $out = $i.out; }
     | w = tantque { $out = $w.out; }
+    | b = bloc [$out = $b.out; }
     ;
 
 assignment returns [TP2.ASD.AffectInstruction out]

@@ -6,7 +6,7 @@ import TP2.Llvm;
 import TP2.SymbolTable;
 import TP2.TypeException;
 
-public class Bloc {
+public class Bloc extends Instruction {
     List<Instruction> sl;
     List<Variable> v;
 
@@ -49,7 +49,7 @@ public class Bloc {
     }
 
     // IR generation
-    public RetBloc toIR(SymbolTable st, String ident) throws TypeException {
+    public RetInstruction toIR(SymbolTable st, String ident) throws TypeException {
     	
     	
       Llvm.IR irBlock = new  Llvm.IR(Llvm.empty(), Llvm.empty());
@@ -68,8 +68,7 @@ public class Bloc {
 
 
 
-      String lastExprRes = "0";
-      Type lastTypeRes = new Int();
+      String lastExprRes = "void";
       
 
       // computes the IR of the expression
@@ -86,6 +85,6 @@ public class Bloc {
       //commmentBlockD = new Llvm.Bloc("Test Bloc Fin");
       //irBlock.appendCode(commmentBlockD);
 
-      return new RetBloc(irBlock, lastTypeRes, lastExprRes);
+      return new RetInstruction(irBlock, lastExprRes);
     }
   }
