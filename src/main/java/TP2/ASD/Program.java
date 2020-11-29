@@ -1,34 +1,52 @@
 package TP2.ASD;
 
+import java.util.List;
+
 import TP2.Llvm;
 import TP2.SymbolTable;
 import TP2.TypeException;
 import TP2.ASD.Bloc.RetBloc;
 
 public class Program {
-    Bloc e; // What a program contains. TODO : change when you extend the language
+	List<Function> functions;
+	List<Prototype> prototypes;
+	// What a program contains. TODO : change when you extend the language
 
-    public Program(Bloc e) {
-      this.e = e;
+    public Program(List<Function> f, List<Prototype> p) {
+      this.functions = f;
+      this.prototypes = p;
     }
 
     // Pretty-printer
     public String pp() {
-      return e.pp();
+		String res = "";
+		for (Prototype p : prototypes) {
+			res += p.pp();
+		}
+		for (Function f : functions) {
+			res += f.pp();
+		}
+		return res;
     }
 
     // IR generation
     public Llvm.IR toIR() throws TypeException {
       SymbolTable st = new SymbolTable();
 
+      for(Prototype p : prototypes) {
+    	  p.toIR(st);
+      }
       // TODO : change when you extend the language
 
+      Function.RetFunction ret = null;
       // computes the IR of the expression
-      RetBloc retBloc = e.toIR(st);
-      // add a return instruction
-      Llvm.Instruction ret = new Llvm.Return(retBloc.type.toLlvmType(), retBloc.result);
-      retBloc.ir.appendCode(ret);
-
-      return retBloc.ir;
+      for (Function function : functions) {
+		if(ret == null)
+			ret = function.toIR(st);
+		else
+			ret.ir.append(function.toIR(st).ir);
+	}
+     
+      return ret.ir;
     }
   }

@@ -16,7 +16,7 @@ public abstract class Variable {
     }
 
     public abstract String pp();
-    public abstract RetVariable toIR(SymbolTable st) throws TypeException;
+    public abstract RetVariable toIR(SymbolTable st, String ident) throws TypeException;
     
     
     public class RetVariable {

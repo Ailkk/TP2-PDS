@@ -1,8 +1,11 @@
 package TP2.ASD;
 
+import java.util.HashMap;
 import java.util.List;
 
 import TP2.Llvm;
+import TP2.SymbolTable;
+import TP2.TypeException;
 
 public abstract class Prototype {
 	//nom de la fonction
@@ -10,6 +13,9 @@ public abstract class Prototype {
 
 	//declaration / attribut
 	List<String> declaration;
+	
+	//association attributs/types
+	HashMap<String, Type> typesAttributs;
 
 
 
@@ -19,18 +25,22 @@ public abstract class Prototype {
 	}
 
 	public abstract String pp();
+	
+	public abstract RetPrototype toIR(SymbolTable st) throws TypeException;
 
 
-	static public class RetFunction{
+	static public class RetPrototype{
 		public Llvm.IR ir;
 		public Type type;
 		public String ident;
+		public SymbolTable attributs;
 
 
-		public RetFunction(Llvm.IR ir,Type type,String ident) {
+		public RetPrototype(Llvm.IR ir,Type type,String ident, SymbolTable at) {
 			this.ir = ir;
 			this.ident = ident;
 			this.type=type;
+			this.attributs = at;
 		}
 	}
 }

@@ -7,7 +7,7 @@ import TP2.TypeException;
 public abstract class Instruction {
 
 	public abstract String pp();
-	public abstract RetInstruction toIR(SymbolTable st) throws TypeException;;
+	public abstract RetInstruction toIR(SymbolTable st, String ident) throws TypeException;;
 
 	static public class RetInstruction {
 

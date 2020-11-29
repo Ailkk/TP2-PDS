@@ -13,7 +13,7 @@ public class Ident extends Expression {
       return "" + value;
     }
 
-    public RetExpression toIR(SymbolTable st) {
+    public RetExpression toIR(SymbolTable st, String ident) {
       // Here we simply return an empty IR
       // the `result' of this expression is the integer itself (as string)
       return new RetExpression(new Llvm.IR(Llvm.empty(), Llvm.empty()), new Int(), "" + value);

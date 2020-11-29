@@ -28,7 +28,8 @@ public class VoidFunction extends Function{
 		for(String vari : declaration) {
 	        res += vari + ", ";
 	      }
-		return (res + ") \n" + super.bloc.pp());
+		String subRes = res.substring(0, res.length()-2);
+		return (subRes + ") \n" + super.bloc.pp());
 	}
 	
 	public RetFunction toIR(SymbolTable st) throws TypeException {
@@ -53,7 +54,8 @@ public class VoidFunction extends Function{
 			}
 		} else {
 			//sinon on l'ajoute a la table  //TODO
-			symbTab = new SymbolTable.FunctionSymbol(new VoidType(), super.ident,  null, true);
+			
+			symbTab = new SymbolTable.FunctionSymbol(new VoidType(), super.ident,  symbTab, true);
 
             if(!st.add(symbTab)) {
             	throw new TypeException("Error : the symbol " + super.ident + " has already exist in SymbolTable");
@@ -82,7 +84,7 @@ public class VoidFunction extends Function{
              res.ir.appendCode(attribut);
          }
 
-         res.ir.append(super.bloc.toIR(st, super.ident));
+         res.ir.append(super.bloc.toIR(st, super.ident).ir);
          res.ir.appendCode(retour);
 
          return res;	 

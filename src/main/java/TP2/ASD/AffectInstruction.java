@@ -22,9 +22,9 @@ public class AffectInstruction extends Instruction {
 	}
 
 	@Override
-	public RetInstruction toIR(SymbolTable st) throws TypeException {
-		 RetExpression leftRet = left.toIR(st);
-	     RetExpression rightRet = right.toIR(st);
+	public RetInstruction toIR(SymbolTable st, String ident) throws TypeException {
+		 RetExpression leftRet = left.toIR(st, ident);
+	     RetExpression rightRet = right.toIR(st, ident);
 
 	      // We check if the types mismatches
 	      if(!leftRet.type.equals(rightRet.type)) {

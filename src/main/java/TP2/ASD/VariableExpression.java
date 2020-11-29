@@ -17,13 +17,13 @@ public class VariableExpression extends Expression {
 		return "" + value;
 	}
 
-	public RetExpression toIR(SymbolTable st) throws TypeException {
+	public RetExpression toIR(SymbolTable st, String ident) throws TypeException {
 		// Here we simply return an empty IR
 		// the `result' of this expression is the integer itself (as string)
 		SymbolTable.VariableSymbol identSymbol = (SymbolTable.VariableSymbol) st.lookup(this.value);
 		//SymbolTable.VariableSymbol verif = VariableSymbol(new Int(), pp());
 		
-		String ident = "";
+		String identExp = "";
 		//La variable existe ?
 		
 		if(identSymbol == null) {
@@ -37,7 +37,7 @@ public class VariableExpression extends Expression {
 		if(st.add(symbol)) {
 			st.remove(pp());
 		}else {*/
-			ident = "%" + value;
+			identExp = "%" + value;
 			
 			String result = Utils.newtmp();
 
@@ -45,7 +45,7 @@ public class VariableExpression extends Expression {
 			
 			RetExpression ret = new RetExpression(new Llvm.IR(Llvm.empty(), Llvm.empty()), new Int(), result);
 
-            Llvm.Instruction load = new Llvm.Load(result, identSymbol.type.toLlvmType(),  ident, identSymbol.type.toLlvmType());
+            Llvm.Instruction load = new Llvm.Load(result, identSymbol.type.toLlvmType(),  identExp, identSymbol.type.toLlvmType());
 
             ret.ir.appendCode(load);
 

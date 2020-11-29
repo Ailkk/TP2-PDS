@@ -17,9 +17,9 @@ options {
 // TODO : other rules
 
 program returns [TP2.ASD.Program out]
-    : e=bloc EOF { $out = new TP2.ASD.Program($e.out); }
-    ;
-    
+	: p = prototype f = function EOF {$out = new TP2.ASD.Program($p.out, $f.out);}
+	;
+
 bloc returns [TP2.ASD.Bloc out]
 	: {List<TP2.ASD.Instruction> l = new ArrayList(); List<TP2.ASD.Variable> r = new ArrayList(); }
 	(INT v=variable {r.add($v.out);}  ( VIRG v=variable {r.add($v.out);} )* )?

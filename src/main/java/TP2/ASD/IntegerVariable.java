@@ -17,7 +17,7 @@ public class IntegerVariable extends Variable {
 	}
 
 	@Override
-	public RetVariable toIR(SymbolTable st) throws TypeException {
+	public RetVariable toIR(SymbolTable st, String ident) throws TypeException {
 		
 		SymbolTable.VariableSymbol symbol = new SymbolTable.VariableSymbol(new Int(), super.name);
         String result = "%" + super.name;

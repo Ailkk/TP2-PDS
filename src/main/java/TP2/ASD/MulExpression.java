@@ -20,9 +20,9 @@ import TP2.Utils;
     }
 
     // IR generation
-    public RetExpression toIR(SymbolTable st) throws TypeException {
-    	RetExpression leftRet = left.toIR(st);
-    	RetExpression rightRet = right.toIR(st);
+    public RetExpression toIR(SymbolTable st, String ident) throws TypeException {
+    	RetExpression leftRet = left.toIR(st, ident);
+    	RetExpression rightRet = right.toIR(st, ident);
 
       if(!leftRet.type.equals(rightRet.type)) {
         throw new TypeException("type mismatch: have " + leftRet.type + " and " + rightRet.type);

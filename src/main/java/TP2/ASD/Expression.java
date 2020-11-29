@@ -8,7 +8,7 @@ public abstract class Expression {
 
 
 	    public abstract String pp();
-	    public abstract RetExpression toIR(SymbolTable st) throws TypeException;
+	    public abstract RetExpression toIR(SymbolTable st, String ident) throws TypeException;
 
 	    static public class RetExpression{
 

@@ -28,8 +28,8 @@ public class WhileInstruction extends Instruction {
 	}
 
 	@Override
-	public RetInstruction toIR(SymbolTable st) throws TypeException {
-		RetExpression condition = this.cond.toIR(st);
+	public RetInstruction toIR(SymbolTable st, String ident) throws TypeException {
+		RetExpression condition = this.cond.toIR(st, ident);
 		Int typeInt = new Int();
 		if(!condition.type.equals(typeInt)) {
 			throw new TypeException("type mismatch: have " + condition.type + " and " + typeInt);
@@ -56,7 +56,7 @@ public class WhileInstruction extends Instruction {
         ret.ir.appendCode(brCond);
         ret.ir.appendCode(new Llvm.Label(faireWhile));
         //je comprends pas comment ajuster cette ligne
-        ret.ir.append(this.bloc.toIR(st).ir);
+        ret.ir.append(this.bloc.toIR(st, ident).ir);
         ret.ir.appendCode(brFinWhile);
 
         ret.ir.appendCode(new Llvm.Label(finWhile));

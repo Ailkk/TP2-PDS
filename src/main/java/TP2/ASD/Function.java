@@ -3,6 +3,8 @@ package TP2.ASD;
 import java.util.List;
 
 import TP2.Llvm;
+import TP2.SymbolTable;
+import TP2.TypeException;
 
 public abstract class Function {
 
@@ -22,6 +24,8 @@ public abstract class Function {
 	}
 	
 	public abstract String pp();
+	
+	public abstract RetFunction toIR(SymbolTable st) throws TypeException;
 	
 	
 	static public class RetFunction{

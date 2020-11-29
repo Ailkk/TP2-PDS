@@ -44,9 +44,9 @@ public class IfElseInstruction extends Instruction {
 	 
 	 
 	 
-	 public RetInstruction toIR(SymbolTable st) throws TypeException {	 
+	 public RetInstruction toIR(SymbolTable st, String ident) throws TypeException {	 
 		 
-		RetExpression condition = this.expr.toIR(st);
+		RetExpression condition = this.expr.toIR(st, ident);
 		Int typeInt = new Int();
 		if(!condition.type.equals(typeInt)) {
 			throw new TypeException("type mismatch: have " + condition.type + " and " + typeInt);
@@ -80,13 +80,13 @@ public class IfElseInstruction extends Instruction {
         ret.ir.appendCode(brCond);
         ret.ir.appendCode(new Llvm.Label(debutSi));
         //je comprends pas comment ajuster cette ligne
-        ret.ir.append(this.bloc1.toIR(st).ir);
+        ret.ir.append(this.bloc1.toIR(st, ident).ir);
         ret.ir.appendCode(brFinSi);
 
         if(this.bloc2 != null) {//Si il y a un else
             //Pareil
         	ret.ir.appendCode(new Llvm.Label(sinon));
-            ret.ir.append(this.bloc2.toIR(st).ir);
+            ret.ir.append(this.bloc2.toIR(st, ident).ir);
             ret.ir.appendCode(brFinSi);
         }
 

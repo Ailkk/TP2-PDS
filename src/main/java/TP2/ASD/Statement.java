@@ -6,7 +6,7 @@ import TP2.TypeException;
 
 public abstract class Statement {
     public abstract String pp();
-    public abstract RetStatement toIR(SymbolTable st) throws TypeException;
+    public abstract RetStatement toIR(SymbolTable st, String ident) throws TypeException;
 
     static public class RetStatement{
       // The LLVM IR:

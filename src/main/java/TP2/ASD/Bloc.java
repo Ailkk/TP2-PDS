@@ -49,7 +49,7 @@ public class Bloc {
     }
 
     // IR generation
-    public RetBloc toIR(SymbolTable st) throws TypeException {
+    public RetBloc toIR(SymbolTable st, String ident) throws TypeException {
     	
     	
       Llvm.IR irBlock = new  Llvm.IR(Llvm.empty(), Llvm.empty());
@@ -60,8 +60,8 @@ public class Bloc {
       Variable.RetVariable retVar = null;
       
       for(Variable variable : this.v) {
-          if(retVar == null) retVar = variable.toIR(st);
-          else retVar.ir.append(variable.toIR(st).ir);
+          if(retVar == null) retVar = variable.toIR(st, ident);
+          else retVar.ir.append(variable.toIR(st, ident).ir);
       }
 
       if(retVar != null) irBlock.append(retVar.ir);
@@ -76,7 +76,7 @@ public class Bloc {
 
       //For tout les statements
       for (Instruction s : sl) {
-    	  Instruction.RetInstruction retStmt = s.toIR(st);
+    	  Instruction.RetInstruction retStmt = s.toIR(st, ident);
         irBlock.append(retStmt.ir);
         lastExprRes = retStmt.result;
         //lastTypeRes = retStmt.type;

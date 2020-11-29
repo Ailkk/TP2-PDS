@@ -21,9 +21,9 @@ public class SubExpression extends Expression{
     }
 
     // IR generation
-    public RetExpression toIR(SymbolTable st) throws TypeException {
-    	RetExpression leftRet = left.toIR(st);
-      RetExpression rightRet = right.toIR(st);
+    public RetExpression toIR(SymbolTable st, String ident) throws TypeException {
+    	RetExpression leftRet = left.toIR(st, ident);
+      RetExpression rightRet = right.toIR(st, ident);
 
       // We check if the types mismatches
       if(!leftRet.type.equals(rightRet.type)) {
