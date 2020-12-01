@@ -6,19 +6,17 @@ import TP2.Llvm;
 import TP2.SymbolTable;
 import TP2.TypeException;
 
-public class Bloc extends Instruction {
+public class Bloc {
     List<Instruction> sl;
     List<Variable> v;
 
     static public class RetBloc {
       // The LLVM IR:
       public Llvm.IR ir;
-      public Type type;
       public String result;
 
-      public RetBloc(Llvm.IR ir, Type type, String result) {
+      public RetBloc(Llvm.IR ir, String result) {
         this.ir = ir;
-        this.type = type;
         this.result = result;
       }
 
@@ -49,7 +47,7 @@ public class Bloc extends Instruction {
     }
 
     // IR generation
-    public RetInstruction toIR(SymbolTable st, String ident) throws TypeException {
+    public RetBloc toIR(SymbolTable st, String ident) throws TypeException {
     	
     	
       Llvm.IR irBlock = new  Llvm.IR(Llvm.empty(), Llvm.empty());
@@ -75,16 +73,15 @@ public class Bloc extends Instruction {
 
       //For tout les statements
       for (Instruction s : sl) {
-    	  Instruction.RetInstruction retStmt = s.toIR(st, ident);
+    	Instruction.RetInstruction retStmt = s.toIR(st, ident);
         irBlock.append(retStmt.ir);
         lastExprRes = retStmt.result;
-        //lastTypeRes = retStmt.type;
       }
       
       //Fin du For
       //commmentBlockD = new Llvm.Bloc("Test Bloc Fin");
       //irBlock.appendCode(commmentBlockD);
 
-      return new RetInstruction(irBlock, lastExprRes);
+      return new RetBloc(irBlock, lastExprRes);
     }
   }

@@ -8,7 +8,7 @@ import TP2.SymbolTable;
 import TP2.SymbolTable.VariableSymbol;
 import TP2.TypeException;
 
-public abstract class Prototype {
+public class Prototype {
 	//nom de la fonction
 	String ident;
 	

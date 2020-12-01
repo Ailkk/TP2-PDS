@@ -10,7 +10,7 @@ import TP2.SymbolTable.FunctionSymbol;
 import TP2.SymbolTable.VariableSymbol;
 import TP2.TypeException;
 
-public abstract class Function {
+public class Function {
 
 	//nom de la fonction
 	String ident;
@@ -22,10 +22,10 @@ public abstract class Function {
 	List<String> declaration;
 	
 	//contenu de la fonction
-	Instruction inst;
+	Bloc bloc;
 	
-	public Function(String i, Type t, List<String> v , Instruction ins) {
-		this.inst=ins;
+	public Function(String i, Type t, List<String> v , Bloc b) {
+		this.bloc=b;
 		this.type = t;
 		this.declaration=v;
 		this.ident=i;
@@ -37,7 +37,7 @@ public abstract class Function {
 			res += string + ",";
 		}
 		String subRes  = res.substring(0, res.length()-2);
-		return subRes + ")\n";
+		return subRes + ")\n" + bloc.pp();
 	}
 	
 	public RetFunction toIR(SymbolTable st) throws TypeException{
@@ -52,9 +52,9 @@ public abstract class Function {
 			typeAttributs.put(var, new Llvm.Int());
 		}
 		
-		
 		SymbolTable.FunctionSymbol mock = new SymbolTable.FunctionSymbol(type, ident, lVarSymb, false);
 		
+		//FIXME problème on passe dans le else et on throw alors que l'on devrait pas
 		//on verifie que la fonction correspond au proto
 		if(mock.equals(symbTab)) {
 			symbTab = new SymbolTable.FunctionSymbol(type, ident, lVarSymb, true);
@@ -63,7 +63,7 @@ public abstract class Function {
 		}
 		else {
 			if(!ident.equals("main"))
-				throw new TypeException("Error, this function isn't declared as a prototype");
+				throw new TypeException("Error," + this.ident + "function isn't declared as a prototype");
 		}
 		
 		/* tout ce bloc est géré par le if du dessus ? /\
@@ -115,7 +115,7 @@ public abstract class Function {
              res.ir.appendCode(attribut);
          }
 
-         res.ir.append(inst.toIR(st, ident).ir);
+         res.ir.append(bloc.toIR(st, ident).ir);
          res.ir.appendCode(retour);
 
          return res;	

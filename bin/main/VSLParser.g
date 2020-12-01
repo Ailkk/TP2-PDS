@@ -20,7 +20,7 @@ program returns [TP2.ASD.Program out]
 	: p=prototype  f=function EOF {$out = new TP2.ASD.Program($p.out, $f.out);}
 	;
 
-prototype returns [List<TP2.ADS.Prototype> out] locals [String ident, List<String> declarations]
+prototype returns [List<TP2.ASD.Prototype> out] locals [String ident, List<String> declarations]
 	: { $out = new ArrayList<TP2.ASD.Prototype>(); }
 	( { $declarations = new ArrayList<String>(); }
 	( PROTO INT IDENT {$ident = $IDENT.text; } LP (( IDENT {$declarations.add($IDENT.text); }) (VIRG IDENT {$declarations.add($IDENT.text);})*)? RP { $out.add(new TP2.ASD.Prototype($ident, $declarations, new TP2.ASD.Int())); }
@@ -28,11 +28,11 @@ prototype returns [List<TP2.ADS.Prototype> out] locals [String ident, List<Strin
 	;
 	
 	
-function returns [List<TP2.ASD.Function> out] locals [String ident, TP2.ASD.Type type, List<String> declarations, TP2.ASD.Instruction inst]
+function returns [List<TP2.ASD.Function> out] locals [String ident, TP2.ASD.Type type, List<String> declarations]
 	: { $out = new ArrayList<TP2.ASD.Function>(); }
-	( { $declarations = new ArrayList<Stirng>(); }
-	( FUNC INT IDENT {$ident = $IDENT.text; } LP (( IDENT {$declarations.add($IDENT.text); }) (VIRG IDENT {$declarations.add($IDENT.text);})*)? RP ins = instruction { $out.add(new TP2.ASD.Function($ident, new TP2.ADS.Int(), $declarations, $ins.out)); }
-	| FUNC VOID IDENT {$ident = $IDENT.text; } LP (( IDENT {$declarations.add($IDENT.text); }) (VIRG IDENT {$declarations.add($IDENT.text);})*)? RP ins = instruction { $out.add(new TP2.ASD.Function($ident, new TP2.ADS.VoidType(), $declarations, $ins.out)); }))+
+	( { $declarations = new ArrayList<String>(); }
+	( FUNC INT IDENT {$ident = $IDENT.text; } LP (( IDENT {$declarations.add($IDENT.text); }) (VIRG IDENT {$declarations.add($IDENT.text);})*)? RP b=bloc { $out.add(new TP2.ASD.Function($ident, new TP2.ASD.Int(), $declarations, $b.out)); }
+	| FUNC VOID IDENT {$ident = $IDENT.text; } LP (( IDENT {$declarations.add($IDENT.text); }) (VIRG IDENT {$declarations.add($IDENT.text);})*)? RP b=bloc { $out.add(new TP2.ASD.Function($ident, new TP2.ASD.VoidType(), $declarations, $b.out)); }))+
 	;
 
 bloc returns [TP2.ASD.Bloc out]
@@ -45,9 +45,15 @@ instruction returns [TP2.ASD.Instruction out]
     : a=assignment { $out = $a.out; }
     | i=sialors { $out = $i.out; }
     | w = tantque { $out = $w.out; }
-    | b = bloc [$out = $b.out; }
+    | ret = retourne { $out = $ret.out; }
     ;
 
+
+retourne returns [TP2.ASD.Return out]
+	: RETURN e = expression { $out = new TP2.ASD.Return($e.out); }
+	;
+	
+	
 assignment returns [TP2.ASD.AffectInstruction out]
     : l=id EGAL r=expression { $out = new TP2.ASD.AffectInstruction($l.out, $r.out); }
     ;
@@ -83,7 +89,7 @@ sialors returns [TP2.ASD.IfElseInstruction out]
 	;
 	
 tantque returns [TP2.ASD.WhileInstruction out]
-	: WHILE e=expression DO LA b=bloc RA DONE { $out = new TP2.ASD.WhileInstruction($e.out, $b.out); }
+	: WHILE e=expression DO b=bloc DONE { $out = new TP2.ASD.WhileInstruction($e.out, $b.out); }
 	;
 
 primary returns [TP2.ASD.Expression out]

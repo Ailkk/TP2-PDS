@@ -8,7 +8,7 @@ options {
   package TP2;
 }
 
-WS : (' '|'\n'|'\t'|'\r') -> skip
+WS : (' '|'\n'|'\t'|'\r'|'{'|'}') -> skip
    ;
 
 COMMENT : '//' (~'\n')* -> skip
@@ -22,8 +22,7 @@ fragment ASCII  : ~('\n'|'"');
 // keywords
 LP    : '('      ;
 RP    : ')'      ;
-LA    : '{'      ;
-RA    : '}'      ;
+
 PLUS  : '+'      ;
 MOINS : '-'      ;
 MULTI : '*'      ;
@@ -42,6 +41,7 @@ DO    : 'DO'     ;
 DONE  : 'DONE'   ;
 FUNC  : 'FUNC'   ;
 PROTO : 'PROTO'  ;
+RETURN: 'RETURN' ;
 
 
 // TODO : other keywords
