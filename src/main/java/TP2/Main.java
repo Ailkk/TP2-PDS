@@ -43,6 +43,7 @@ public class Main {
         // Output LLVM IR
         System.out.println(ir);
       } catch(TypeException e) {
+    	  //System.out.println("Le parser n'a pas réussi a parser le code VSL.");
         e.printStackTrace(); // Useful for developping, not for the ``end users''!
         System.err.println(e.getMessage());
       }

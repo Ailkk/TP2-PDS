@@ -45,6 +45,15 @@ public class Function {
 		
 		HashMap<String,Llvm.Type> typeAttributs = new HashMap<String,Llvm.Type>();
 		
+		List<Llvm.Type> typesAttr = new ArrayList<Llvm.Type>();
+		for(String var : declaration) {
+			if(var.contains("["))
+				System.out.println("tablo");
+			else
+				typesAttr.add(new Llvm.Int());
+		}
+		
+		
 		//TODO changer une fois qu'on met les tableaux d'entiers !
 		List<VariableSymbol> lVarSymb = new ArrayList<VariableSymbol>();
 		for (String var : declaration) {
@@ -60,45 +69,20 @@ public class Function {
 			symbTab = new SymbolTable.FunctionSymbol(type, ident, lVarSymb, true);
 			st.remove(ident);
 			st.add(symbTab);
+			for(SymbolTable.VariableSymbol D: lVarSymb)
+				st.add(D);
 		}
 		else {
 			if(!ident.equals("main"))
 				throw new TypeException("Error," + this.ident + "function isn't declared as a prototype");
 		}
 		
-		/* tout ce bloc est géré par le if du dessus ? /\
-		//verification de la presence de la function dans la map sauf pour main
-		if(this.ident.equals("main")) {
-			if(symbTab != null) {
-				//Function present dans la table
-				 
-				//Verification des parametre
-				for(String param : declaration) {
-					if(st.lookup(param)==null) {
-						throw new TypeException("Error: this Parametre don't existe in SymbolTable");
-					}
-					typeAttributs.put(param, ((SymbolTable.VariableSymbol) st.lookup(param)).type.toLlvmType());
-				}
-			}else {
-				//La fonction n'est pas presente dans la table
-				throw new TypeException("Error: this function don't existe in SymbolTable");
-			}
-		} else {
-			//sinon on l'ajoute a la table  //TODO
-			
-			symbTab = new SymbolTable.FunctionSymbol(new VoidType(), ident,  symbTab, true);
-
-            if(!st.add(symbTab)) {
-            	throw new TypeException("Error : the symbol " + ident + " has already exist in SymbolTable");
-            }
-		}*/
-		
 		String name = "@" + ident;
 		
 		
-		RetFunction res = new RetFunction((new Llvm.IR(Llvm.empty(), Llvm.empty())), new VoidType(), name);
+		RetFunction res = new RetFunction((new Llvm.IR(Llvm.empty(), Llvm.empty())), type, name);
 		
-		 Llvm.Instruction def = new Llvm.DefineFunc(res.ident, res.type.toLlvmType(), this.declaration, typeAttributs);
+		Llvm.Instruction def = new Llvm.DefineFunc(res.ident, res.type.toLlvmType(), this.declaration, typeAttributs);
          
 
          List<Llvm.Instruction> varAttributs = new ArrayList<Llvm.Instruction>();
@@ -116,7 +100,8 @@ public class Function {
          }
 
          res.ir.append(bloc.toIR(st, ident).ir);
-         res.ir.appendCode(retour);
+         if(res.type instanceof VoidType)
+        	 res.ir.appendCode(retour);
 
          return res;	
 	}

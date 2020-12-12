@@ -1,3 +1,14 @@
+PROTO INT fact(m)
+
+FUNC INT fact (k)
+{
+INT i
+
+i := k+6
+
+RETURN i
+}
+
 FUNC VOID main()
 {
 INT x, y
